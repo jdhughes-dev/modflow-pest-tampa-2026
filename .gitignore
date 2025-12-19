@@ -209,6 +209,10 @@ __marimo__/
 # mac exclusions
 .DS_Store
 
+# installation exclusins
+modflow6/
+installation/temp/
+
 # modflow exclusions
 *.lst
 *.hds
