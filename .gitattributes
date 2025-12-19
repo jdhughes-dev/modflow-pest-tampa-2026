@@ -12,3 +12,4 @@
 *.png binary
 *.jpg binary
 *.nc binary
+*.pkl binary
