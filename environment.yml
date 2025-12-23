@@ -45,7 +45,7 @@ dependencies:
   - pymetis
 
   # pre-commit
-  = pre-commit
+  - pre-commit
   - nbstripout
   - ruff
   - jupyterlab_code_formatter
