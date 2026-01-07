@@ -1,2 +1,1 @@
-  Lake  HEAD  1 4 4
-  Lake-S  HEAD  1 16 9
+  Lake-stage  HEAD  1 16 9

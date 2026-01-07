@@ -1,2 +1,1 @@
-  PF  RIV  PF
-  RIVFLOW  RIV  RIV
+  RIV-SWGW  RIV  RIV
