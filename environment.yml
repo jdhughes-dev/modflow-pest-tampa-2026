@@ -44,6 +44,7 @@ dependencies:
   - modflowapi
   - pymetis
   - scikit-learn
+  - pyarrow
 
   # pre-commit
   - pre-commit
