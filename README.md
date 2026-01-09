@@ -14,20 +14,20 @@ Tuesday January 20, 2026 8:00 AM - Friday January 23, 2026 2:00 PM
 | 8:00 AM | 9:00 AM | **Presentation** | MODFLOW 6 Overview
 | 9:00 AM | 9:30 AM | **Software installation** | testing and troubleshooting
 | 9:30 AM| 11:00 AM | **Presentation<br>Hands-on** | getting started with MODFLOW 6 and unstructured grids
-| 11:00 AM | 12:00 PM | **Presentation<br>Hands-on** | UZF and MVR
-| 1:00 PM | 1:30 PM | **Presentation<br>Hands-on** | MAW
-| 1:30 PM | 3:00 PM | **Presentation<br>Hands-on** | LAK and SFR
-| 3:00 PM | 4:00 PM | **Presentation<br>Hands-on** | PRT
+| 11:00 AM | 12:00 PM | **Presentation<br>Hands-on** | UZF and MVR packages
+| 1:00 PM | 1:30 PM | **Presentation<br>Hands-on** | MAW package
+| 1:30 PM | 3:00 PM | **Presentation<br>Hands-on** | LAK and SFR packages
+| 3:00 PM | 4:00 PM | **Presentation<br>Hands-on** | Particle tracking with the PRT model
 
 #### __Wednesday - MODFLOW 6__
 | Start Time | End Time  | | Topic |
 | ---------- | -------- | - | ----- |
 | 8:00 AM | 8:30 AM | **Presentation<br>Hands-on** | variable density concepts and simulations 
 | 8:30 AM | 9:00 AM | **Hands-on** | variable density concepts and simulations 
-| 9:00 AM | 10:00 AM | **Presentation<br>Hands-on** | parallel simulations 
+| 9:00 AM | 10:00 AM | **Presentation<br>Hands-on** | parallel model simulations 
 | 10:00 AM | 11:00 AM | **Presentation<br>Hands-on** | deep dive on solver settings
 | 11:00 AM | 12:00 PM | **Presentation<br>Hands-on** | MODFLOW 6 Application Programming Interface (API)
-| 1:00 PM | 2:00 PM | **Presentation<br>Hands-on** | MODFLOW 6 Adjoint (MF6-ADJ) and current and future MODFLOW 6 developments
+| 1:00 PM | 2:00 PM | **Presentation<br>Hands-on** | MODFLOW 6 Adjoint (MF6-ADJ) and current/future MODFLOW 6 developments
 
 #### __Thursday - PEST++__
 | Start Time | End Time  | | Topic |
