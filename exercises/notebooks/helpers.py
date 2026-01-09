@@ -1,11 +1,11 @@
 import os
 import pandas as pd
-import flopy
 
 
 def process_csv_files(model_ws="."):
     import os
     import pandas as pd
+    import flopy
 
     sim = flopy.mf6.MFSimulation.load(sim_ws=model_ws, load_only=["tdis"])
     start = pd.to_datetime(sim.tdis.start_date_time.data)
@@ -26,14 +26,14 @@ def process_csv_files(model_ws="."):
             )
             df.index.name = "datetime"
             df.to_csv(os.path.join(model_ws, csv_file))
-        print(csv_file)
+        # print(csv_file)
         if "sv.gwf.wt.csv" in csv_file:
             wt_df = df
         elif "sv.gwf.aq.csv" in csv_file:
             aq_df = df
     if aq_df is not None and wt_df is not None:
-        print(wt_df)
-        print(aq_df)
+        # print(wt_df)
+        # print(aq_df)
         if "datetime" in wt_df.columns:
             wt_df.index = pd.to_datetime(wt_df.pop("datetime"))
         if "datetime" in aq_df.columns:
