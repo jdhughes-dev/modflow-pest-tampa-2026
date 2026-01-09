@@ -9,8 +9,8 @@ Tuesday January 20, 2026 8:00 AM - Friday January 23, 2026 2:00 PM
 ### <u>Tentative training agenda</u>:
 
 #### __Tuesday - MODFLOW 6__
-| Start Time | End Time  | | Topic |
-| ---------- | -------- | - | ----- |
+| Start Time | End Time  | Type | Topic |
+| ---------- | -------- | ---- | ----- |
 | 8:00 AM | 9:00 AM | **Presentation** | MODFLOW 6 Overview
 | 9:00 AM | 9:30 AM | **Software installation** | testing and troubleshooting
 | 9:30 AM| 11:00 AM | **Presentation<br>Hands-on** | getting started with MODFLOW 6 and unstructured grids
@@ -20,8 +20,8 @@ Tuesday January 20, 2026 8:00 AM - Friday January 23, 2026 2:00 PM
 | 3:00 PM | 4:00 PM | **Presentation<br>Hands-on** | Particle tracking with the PRT model
 
 #### __Wednesday - MODFLOW 6__
-| Start Time | End Time  | | Topic |
-| ---------- | -------- | - | ----- |
+| Start Time | End Time  | Type | Topic |
+| ---------- | -------- | ---- | ----- |
 | 8:00 AM | 8:30 AM | **Presentation<br>Hands-on** | variable density concepts and simulations 
 | 8:30 AM | 9:00 AM | **Hands-on** | variable density concepts and simulations 
 | 9:00 AM | 10:00 AM | **Presentation<br>Hands-on** | parallel model simulations 
@@ -30,8 +30,8 @@ Tuesday January 20, 2026 8:00 AM - Friday January 23, 2026 2:00 PM
 | 1:00 PM | 2:00 PM | **Presentation<br>Hands-on** | MODFLOW 6 Adjoint (MF6-ADJ) and current/future MODFLOW 6 developments
 
 #### __Thursday - PEST++__
-| Start Time | End Time  | | Topic |
-| ---------- | -------- | - | ----- |
+| Start Time | End Time  | Type | Topic |
+| ---------- | -------- | ---- | ----- |
 |  8:00 AM | 9:00 AM | **Presentation** | calibration, parameters, predictions, and data
 | 9:00 AM | 11:00 AM | **Hands-on** | setting up a pest interface manually. understanding parallelization concepts
 | 11:00 AM | 12:00 PM | **Presentation** | pilot points, geostatistics, and heterogeneity
@@ -40,8 +40,8 @@ Tuesday January 20, 2026 8:00 AM - Friday January 23, 2026 2:00 PM
 | 3:30 PM | 4:30 PM | **Hands-on** | initial ies run
 
 #### __Friday - PEST++__
-| Start Time | End Time  | | Topic |
-| ---------- | -------- | - | ----- |
+| Start Time | End Time  | Type | Topic |
+| ---------- | -------- | ---- | ----- |
 | 9:00 AM | 10:00 AM | **Hands-on** | running experiments with ies to understand how the prior, weights, and noise influence results
 | 10:00 AM | 11:00 AM | **Presentation** | management optimization
 | 11:00 AM | 12:00 PM | **Hands-on** | running experiments with opt to understand how bounds and constraints influence results
