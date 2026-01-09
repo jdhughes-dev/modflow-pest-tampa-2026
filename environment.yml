@@ -1,6 +1,7 @@
-name: tampa25modflowpest
+name: tampa26mf6pp
 channels:
   - conda-forge
+  - nodefaults
 dependencies:
 
   # primary dependencies
@@ -37,15 +38,19 @@ dependencies:
   - pyvista
   - vtk
   - imageio
-  - pyemu
   - requests
   - pytest
   - statsmodels
   - modflowapi
   - pymetis
+  - scikit-learn
+  - pyarrow
 
   # pre-commit
   - pre-commit
   - nbstripout
   - ruff
   - jupyterlab_code_formatter
+  - pip:
+       - pypestutils
+       - git+https://github.com/jtwhite79/pyemu.git@feat_lesswarn
