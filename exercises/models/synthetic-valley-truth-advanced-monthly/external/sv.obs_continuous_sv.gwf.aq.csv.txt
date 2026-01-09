@@ -1,0 +1,17 @@
+  aq01  head  5 3 18
+  aq02  head  4 4 11
+  aq03  head  4 7 21
+  aq04  head  4 13 23
+  aq05  head  5 15 12
+  aq06  head  4 17 19
+  aq07  head  4 18 2
+  aq08  head  4 19 7
+  aq09  head  4 20 12
+  aq10  head  4 19 23
+  aq11  head  4 27 6
+  aq12  head  4 28 12
+  aq13  head  4 29 24
+  aq14  head  4 31 7
+  aq15  head  5 34 15
+  aq16  head  4 37 2
+  aq17  head  4 38 23

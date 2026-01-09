@@ -346,10 +346,10 @@ def plot_ies_timeseries(m_d, noptmax=None):
 
 
 if __name__ == "__main__":
-    # extract_true_obs(
-    #      os.path.join("..", "models", "synthetic-valley-truth-advanced-monthly")
-    # )
+    extract_true_obs(
+        os.path.join("..", "models", "synthetic-valley-truth-advanced-monthly")
+    )
     # fig,axes = plot_ies_properties("master_ies_advanced","npf-k-layer1",noptmax=None)
     # plt.savefig("test.pdf")
     # plt.close(fig)
-    plot_ies_timeseries("master_ies_advanced", noptmax=None)
+    # plot_ies_timeseries("master_ies_advanced", noptmax=None)
