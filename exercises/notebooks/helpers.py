@@ -71,6 +71,7 @@ def extract_true_obs(m_d):
     # df.index = pd.to_datetime(sim.tdis.start_date_time.data) + pd.to_timedelta(np.cumsum(perlen),unit="d")
     df.columns = df.columns.map(str.lower)
     df.to_csv(os.path.join(m_d, "raw_obs.csv"))
+    print(df)
 
 
 def plot_ies_properties(m_d, tag, noptmax=None):
@@ -156,6 +157,13 @@ def plot_ies_properties(m_d, tag, noptmax=None):
 
 
 def plot_ies_timeseries(m_d, noptmax=None):
+    truth_obs = pd.read_csv(
+        os.path.join(
+            "..", "models", "synthetic-valley-truth-advanced-monthly", "raw_obs.csv"
+        ),
+        index_col=0,
+        parse_dates=True,
+    )
     pst = pyemu.Pst(os.path.join(m_d, "pest.pst"))
     obs = pst.observation_data
     sgobs = obs.loc[obs.obsnme.str.contains("swgw"), :].copy()
@@ -173,6 +181,7 @@ def plot_ies_timeseries(m_d, noptmax=None):
 
     nz_grps = obs.loc[obs.weight > 0, "obgnme"].unique()
     nz_grps.sort()
+    grps = obs.obgnme.unique()
     assert len(nz_grps) > 0
     aq_grps = [g for g in nz_grps if "aq" in g]
     assert len(aq_grps) > 0
@@ -181,7 +190,7 @@ def plot_ies_timeseries(m_d, noptmax=None):
         assert g in nz_grps
     dif_grps = [g.replace("aq", "diff") for g in aq_grps]
     for g in dif_grps:
-        assert g in nz_grps
+        assert g in grps
 
     # print(nz_grps)
 
@@ -200,6 +209,7 @@ def plot_ies_timeseries(m_d, noptmax=None):
         for ax, grp in zip(axes, sg_grps):
             oobs = sgobs.loc[sgobs.obgnme == grp, :].copy()
             oobs.sort_values(by="datetime", inplace=True)
+
             dts = oobs.datetime.values
             vals = pr.loc[:, oobs.obsnme].values
             [
@@ -216,7 +226,7 @@ def plot_ies_timeseries(m_d, noptmax=None):
             ]
             ax.plot(nzdts, vals[-1, :], "r", lw=0.1, label="obs+noise")
             ax.scatter(
-                nzdts, nzobs.obsval, marker="^", s=30, c="r", zorder=10, label="obs"
+                nzdts, nzobs.obsval, marker="^", s=50, c="r", zorder=10, label="obs"
             )
             if pt is not None:
                 vals = pt.loc[:, oobs.obsnme].values
@@ -225,9 +235,13 @@ def plot_ies_timeseries(m_d, noptmax=None):
                     for i in range(vals.shape[0])
                 ]
                 ax.plot(dts, vals[-1, :], "b", lw=0.2, label="posterior")
-            ax.plot(dts, oobs.obsval, "r--", lw=2, label="truth")
+            # ax.plot(dts, oobs.obsval, "r--", lw=2, label="truth")
+            usecol = oobs.usecol.unique()
+            tobs = truth_obs.loc[:, usecol]
+            ax.plot(tobs.index, tobs.values, "k--", lw=2, label="truth", zorder=10)
             ax.set_title(grp, loc="left")
             ax.legend(loc="upper right")
+            ax.grid()
         plt.tight_layout()
         pdf.savefig()
         plt.close(fig)
@@ -250,7 +264,7 @@ def plot_ies_timeseries(m_d, noptmax=None):
             for i in range(vals.shape[0])
         ]
         ax.plot(nzdts, vals[-1, :], "r", lw=0.1, label="obs+noise")
-        ax.scatter(nzdts, nzobs.obsval, marker="^", s=30, c="r", zorder=10, label="obs")
+        ax.scatter(nzdts, nzobs.obsval, marker="^", s=50, c="r", zorder=10, label="obs")
         if pt is not None:
             vals = pt.loc[:, oobs.obsnme].values
             [
@@ -258,9 +272,13 @@ def plot_ies_timeseries(m_d, noptmax=None):
                 for i in range(vals.shape[0])
             ]
             ax.plot(dts, vals[-1, :], "b", lw=0.2, label="posterior")
-        ax.plot(dts, oobs.obsval, "r--", lw=2, label="truth")
+        # ax.plot(dts, oobs.obsval, "r--", lw=2, label="truth")
+        usecol = oobs.usecol.unique()
+        tobs = truth_obs.loc[:, usecol]
+        ax.plot(tobs.index, tobs.values, "k--", lw=2, label="truth", zorder=10)
         ax.set_title("lake-stage", loc="left")
         ax.legend(loc="upper right")
+        ax.grid()
         plt.tight_layout()
         pdf.savefig()
         plt.close(fig)
@@ -283,7 +301,7 @@ def plot_ies_timeseries(m_d, noptmax=None):
             for i in range(vals.shape[0])
         ]
         ax.plot(nzdts, vals[-1, :], "r", lw=0.1, label="obs+noise")
-        ax.scatter(nzdts, nzobs.obsval, marker="^", s=30, c="r", zorder=10, label="obs")
+        ax.scatter(nzdts, nzobs.obsval, marker="^", s=50, c="r", zorder=10, label="obs")
         if pt is not None:
             vals = pt.loc[:, oobs.obsnme].values
             [
@@ -291,9 +309,13 @@ def plot_ies_timeseries(m_d, noptmax=None):
                 for i in range(vals.shape[0])
             ]
             ax.plot(dts, vals[-1, :], "b", lw=0.2, label="posterior")
-        ax.plot(dts, oobs.obsval, "r--", lw=2, label="truth")
+        # ax.plot(dts, oobs.obsval, "r--", lw=2, label="truth")
+        usecol = oobs.usecol.unique()
+        tobs = truth_obs.loc[:, usecol]
+        ax.plot(tobs.index, tobs.values, "k--", lw=2, label="truth", zorder=10)
         ax.set_title("riv-flow", loc="left")
         ax.legend(loc="upper right")
+        ax.grid()
         plt.tight_layout()
         pdf.savefig()
         plt.close(fig)
@@ -313,12 +335,7 @@ def plot_ies_timeseries(m_d, noptmax=None):
             fig, axes = plt.subplots(3, 1, figsize=(10, 10))
             for ax, oobs, grp in zip(axes, [aobs, wobs, dobs], [agrp, wgrp, dgrp]):
                 dts = oobs.datetime.values
-                vals = pr.loc[:, oobs.obsnme].values
-                [
-                    ax.plot(dts, vals[i, :], "0.5", lw=0.1, alpha=0.2)
-                    for i in range(vals.shape[0])
-                ]
-                ax.plot(dts, vals[-1, :], "0.5", lw=0.1, label="prior")
+
                 nzobs = oobs.loc[oobs.weight > 0, :].copy()
                 nzdts = nzobs.datetime.values
                 vals = noise.loc[:, nzobs.obsnme].values
@@ -328,7 +345,7 @@ def plot_ies_timeseries(m_d, noptmax=None):
                 ]
                 ax.plot(nzdts, vals[-1, :], "r", lw=0.1, label="obs+noise")
                 ax.scatter(
-                    nzdts, nzobs.obsval, marker="^", s=30, c="r", zorder=10, label="obs"
+                    nzdts, nzobs.obsval, marker="^", s=50, c="r", zorder=10, label="obs"
                 )
                 if pt is not None:
                     vals = pt.loc[:, oobs.obsnme].values
@@ -337,19 +354,31 @@ def plot_ies_timeseries(m_d, noptmax=None):
                         for i in range(vals.shape[0])
                     ]
                     ax.plot(dts, vals[-1, :], "b", lw=0.2, label="posterior")
-                ax.plot(dts, oobs.obsval, "r--", lw=2, label="truth")
+                # ax.plot(dts, oobs.obsval, "r--", lw=2, label="truth")
+                usecol = oobs.usecol.unique()
+                tobs = truth_obs.loc[:, usecol]
+                ax.plot(tobs.index, tobs.values, "k--", lw=2, label="truth", zorder=10)
+                ylim = ax.get_ylim()
+                vals = pr.loc[:, oobs.obsnme].values
+                [
+                    ax.plot(dts, vals[i, :], "0.5", lw=0.1, alpha=0.2)
+                    for i in range(vals.shape[0])
+                ]
+                ax.plot(dts, vals[-1, :], "0.5", lw=0.1, label="prior")
+                ax.set_ylim(ylim)
                 ax.set_title(grp, loc="left")
                 ax.legend(loc="upper right")
+                ax.grid()
             plt.tight_layout()
             pdf.savefig()
             plt.close(fig)
 
 
 if __name__ == "__main__":
-    extract_true_obs(
-        os.path.join("..", "models", "synthetic-valley-truth-advanced-monthly")
-    )
-    # fig,axes = plot_ies_properties("master_ies_advanced","npf-k-layer1",noptmax=None)
+    # extract_true_obs(
+    #    os.path.join("..", "models", "synthetic-valley-truth-advanced-monthly")
+    # )
+    # fig,axes = plot_ies_properties("master_ies_advanced","sto-ss-layer1",noptmax=None)
     # plt.savefig("test.pdf")
     # plt.close(fig)
-    # plot_ies_timeseries("master_ies_advanced", noptmax=None)
+    plot_ies_timeseries("master_ies_advanced", noptmax=None)
