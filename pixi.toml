@@ -102,6 +102,9 @@ nbstripout = "*"
 ruff = "*"
 jupyterlab_code_formatter = "*"
 
+[pypi-dependencies]
+mf6adj = { git = "https://github.com/INTERA-Inc/mf6adj.git", rev = "develop" }
+
 [target.unix.dependencies]
 # build dependencies
 clang = "*"
