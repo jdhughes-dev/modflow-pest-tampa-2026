@@ -14,9 +14,9 @@ Tuesday January 20, 2026 8:00 AM - Friday January 23, 2026 2:00 PM
 | 8:00 AM | 9:00 AM | **Presentation** | MODFLOW 6 Overview
 | 9:00 AM | 9:30 AM | **Software installation** | testing and troubleshooting
 | 9:30 AM| 11:00 AM | **Presentation<br>Hands-on** | getting started with MODFLOW 6 and unstructured grids
-| 11:00 AM | 12:00 PM | **Presentation<br>Hands-on** | UZF and MVR packages
+| 11:00 AM | 12:00 PM | **Presentation<br>Hands-on** | UZF package
 | 1:00 PM | 1:30 PM | **Presentation<br>Hands-on** | MAW package
-| 1:30 PM | 3:00 PM | **Presentation<br>Hands-on** | LAK and SFR packages
+| 1:30 PM | 3:00 PM | **Presentation<br>Hands-on** | SFR, LAK, and MVR packages
 | 3:00 PM | 4:00 PM | **Presentation<br>Hands-on** | Particle tracking with the PRT model
 
 #### __Wednesday - MODFLOW 6__
