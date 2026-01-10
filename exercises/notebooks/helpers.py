@@ -333,7 +333,7 @@ def plot_ies_timeseries(m_d, noptmax=None):
             dobs.sort_values(by="datetime", inplace=True)
 
             fig, axes = plt.subplots(3, 1, figsize=(10, 10))
-            for ax, oobs, grp in zip(axes, [aobs, wobs, dobs], [agrp, wgrp, dgrp]):
+            for ax, oobs, grp in zip(axes, [wobs, aobs, dobs], [wgrp, agrp, dgrp]):
                 dts = oobs.datetime.values
 
                 nzobs = oobs.loc[oobs.weight > 0, :].copy()
@@ -375,10 +375,10 @@ def plot_ies_timeseries(m_d, noptmax=None):
 
 
 if __name__ == "__main__":
-    # extract_true_obs(
-    #    os.path.join("..", "models", "synthetic-valley-truth-advanced-monthly")
-    # )
+    extract_true_obs(
+        os.path.join("..", "models", "synthetic-valley-truth-advanced-monthly")
+    )
     # fig,axes = plot_ies_properties("master_ies_advanced","sto-ss-layer1",noptmax=None)
     # plt.savefig("test.pdf")
     # plt.close(fig)
-    plot_ies_timeseries("master_ies_advanced", noptmax=None)
+    # plot_ies_timeseries("master_ies_advanced_mm", noptmax=None)
