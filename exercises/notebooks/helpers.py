@@ -16,9 +16,10 @@ def process_csv_files(model_ws="."):
     csv_files = [f for f in os.listdir(model_ws) if f.endswith(".csv")]
     aq_df = None
     wt_df = None
+    swgw_dfs = []
     for csv_file in csv_files:
         try:
-            df = pd.read_csv(os.path.join(model_ws, csv_file))
+            df = pd.read_csv(os.path.join(model_ws, csv_file), low_memory=True)
         except Exception:
             continue
         df.columns = df.columns.map(
@@ -35,6 +36,36 @@ def process_csv_files(model_ws="."):
             wt_df = df
         elif "sv.gwf.aq.csv" in csv_file:
             aq_df = df
+        swgw_df = df.loc[
+            :,
+            (df.columns.str.contains("riv-swgw"))
+            | (df.columns.str.contains("lake-stage")),
+        ]
+        # print(csv_file,swgw_df.shape)
+        if swgw_df.shape[1] > 0 and csv_file.startswith("sv"):
+            if "datetime" in df.columns:
+                swgw_df.index = pd.to_datetime(df.datetime)
+            # print(swgw_df)
+            print("found", csv_file)
+            # if rivswgw_df is not None:
+            #    raise Exception("#shitsbusted")
+            swgw_dfs.append(swgw_df)
+
+    if swgw_dfs is not None:
+        df = pd.concat(swgw_dfs, axis=1)
+        hist_mean = df.loc[df.index.year < 2015, :].mean()
+        pred_mean = df.loc[df.index.year >= 2015, :].mean()
+        diff_mean = hist_mean - pred_mean
+        df = pd.DataFrame(
+            data={
+                "hist-mean": hist_mean,
+                "pred-mean": pred_mean,
+                "diff-mean": diff_mean,
+            }
+        )
+        df.index.name = "quantity"
+        df.to_csv(os.path.join(model_ws, "swgw-longterm-means.csv"))
+
     if aq_df is not None and wt_df is not None:
         # print(wt_df)
         # print(aq_df)
@@ -375,6 +406,7 @@ def plot_ies_timeseries(m_d, noptmax=None):
 
 
 if __name__ == "__main__":
+    # process_csv_files(os.path.join("..","models","synthetic-valley-truth-advanced-monthly"))
     extract_true_obs(
         os.path.join("..", "models", "synthetic-valley-truth-advanced-monthly")
     )
