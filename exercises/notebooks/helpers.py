@@ -19,7 +19,7 @@ def process_csv_files(model_ws="."):
     swgw_dfs = []
     for csv_file in csv_files:
         try:
-            df = pd.read_csv(os.path.join(model_ws, csv_file), low_memory=True)
+            df = pd.read_csv(os.path.join(model_ws, csv_file), low_memory=False)
         except Exception:
             continue
         df.columns = df.columns.map(
