@@ -197,12 +197,15 @@ def plot_ies_timeseries(m_d, noptmax=None):
     )
     pst = pyemu.Pst(os.path.join(m_d, "pest.pst"))
     obs = pst.observation_data
-    sgobs = obs.loc[obs.obsnme.str.contains("swgw"), :].copy()
+    sgobs = obs.loc[pd.notna(obs.usecol), :]
+    sgobs = sgobs.loc[sgobs.usecol.str.contains("swgw"), :].copy()
     sgobs["datetime"] = pd.to_datetime(sgobs.datetime)
     sg_grps = sgobs.obgnme.unique()
     sg_grps.sort()
+    # print(sg_grps)
+    # exit()
 
-    lkobs = obs.loc[obs.obsnme.str.contains("lake-stage"), :].copy()
+    lkobs = obs.loc[obs.usecol == "lake-stage", :].copy()
     lkobs["datetime"] = pd.to_datetime(lkobs.datetime)
     lkobs.sort_values(by="datetime", inplace=True)
 
@@ -405,12 +408,80 @@ def plot_ies_timeseries(m_d, noptmax=None):
             plt.close(fig)
 
 
+def plot_ies_forecasts(m_d, noptmax=None):
+    pst = pyemu.Pst(os.path.join(m_d, "pest.pst"))
+    obs = pst.observation_data
+    fobs = obs.loc[obs.oname == "forecasts", :]
+    assert len(fobs) > 0
+    quans = fobs.quantity.unique()
+    quans.sort()
+    # print(quans)
+
+    pr = pst.ies.obsen0
+    pt = None
+    if noptmax != 0 and pst.ies.phiactual.iteration.max() > 0:
+        if noptmax is None:
+            noptmax = pst.ies.phiactual.iteration.max()
+        pt = pst.ies.get("obsen", noptmax)
+
+    usecol_order = ["hist-mean", "pred-mean", "diff-mean"]
+    for u in usecol_order:
+        assert u in fobs.usecol.unique()
+    figs, axess = [], []
+    with PdfPages(os.path.join(m_d, "forecasts.pdf")) as pdf:
+        for quan in quans:
+            uobs = fobs.loc[fobs.quantity == quan, :]
+            uobs.sort_index(inplace=True)
+
+            fig, axes = plt.subplots(len(uobs), 1, figsize=(8, 2 * len(uobs)))
+            if len(uobs) == 1:
+                axes = [axes]
+            for ax, usecol in zip(axes, usecol_order):
+                oname = uobs.loc[uobs.usecol == usecol, "obsnme"]
+
+                if pt is not None:
+                    ax.hist(
+                        pt.loc[:, oname].values,
+                        bins=20,
+                        fc="b",
+                        alpha=0.5,
+                        label="posterior",
+                    )
+
+                ax.set_title("{0} {1}".format(quan, usecol), loc="left")
+                # xlim = ax.get_xlim()
+                ax.hist(
+                    pr.loc[:, oname].values, bins=20, fc="0.5", alpha=0.5, label="prior"
+                )
+                # ax.set_xlim(xlim)
+                tval = uobs.loc[oname, "obsval"]
+                # print(quan,usecol,tval)
+                ax.plot(
+                    [tval, tval], ax.get_ylim(), "k--", lw=2, label="truth", zorder=10
+                )
+                ax.legend(loc="upper right")
+                ax.set_yticks([])
+                ax.grid("off")
+            mx = max([ax.get_xlim()[1] for ax in axes[:-1]])
+            mn = min([ax.get_xlim()[0] for ax in axes[:-1]])
+            axes[0].set_xlim(mn, mx)
+            axes[1].set_xlim(mn, mx)
+
+            plt.tight_layout()
+            pdf.savefig()
+            # plt.close(fig)
+            figs.append(fig)
+            axess.append(axes)
+        return figs, axes
+
+
 if __name__ == "__main__":
     # process_csv_files(os.path.join("..","models","synthetic-valley-truth-advanced-monthly"))
-    extract_true_obs(
-        os.path.join("..", "models", "synthetic-valley-truth-advanced-monthly")
-    )
+    # extract_true_obs(
+    #    os.path.join("..", "models", "synthetic-valley-truth-advanced-monthly")
+    # )
     # fig,axes = plot_ies_properties("master_ies_advanced","sto-ss-layer1",noptmax=None)
     # plt.savefig("test.pdf")
     # plt.close(fig)
-    # plot_ies_timeseries("master_ies_advanced_mm", noptmax=None)
+    # plot_ies_timeseries("master_ies_base_mm", noptmax=None)
+    plot_ies_forecasts("master_ies_base_mm", noptmax=None)
