@@ -53,8 +53,8 @@ def process_csv_files(model_ws="."):
 
     if swgw_dfs is not None:
         df = pd.concat(swgw_dfs, axis=1)
-        hist_mean = df.loc[df.index.year < 2015, :].mean()
-        pred_mean = df.loc[df.index.year >= 2015, :].mean()
+        hist_mean = df.loc[(df.index.year < 2015) & (df.index.year >= 2010), :].mean()
+        pred_mean = df.loc[df.index.year > 2019, :].mean()
         diff_mean = hist_mean - pred_mean
         df = pd.DataFrame(
             data={
@@ -477,11 +477,11 @@ def plot_ies_forecasts(m_d, noptmax=None):
 
 if __name__ == "__main__":
     # process_csv_files(os.path.join("..","models","synthetic-valley-truth-advanced-monthly"))
-    # extract_true_obs(
-    #    os.path.join("..", "models", "synthetic-valley-truth-advanced-monthly")
-    # )
+    extract_true_obs(
+        os.path.join("..", "models", "synthetic-valley-truth-advanced-monthly")
+    )
     # fig,axes = plot_ies_properties("master_ies_advanced","sto-ss-layer1",noptmax=None)
     # plt.savefig("test.pdf")
     # plt.close(fig)
     # plot_ies_timeseries("master_ies_base_mm", noptmax=None)
-    plot_ies_forecasts("master_ies_base_mm", noptmax=None)
+    # plot_ies_forecasts("master_ies_base_mm", noptmax=None)
