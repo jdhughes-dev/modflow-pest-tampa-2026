@@ -17,6 +17,7 @@ def process_csv_files(model_ws="."):
     aq_df = None
     wt_df = None
     swgw_dfs = []
+    bd_df = None
     for csv_file in csv_files:
         try:
             df = pd.read_csv(os.path.join(model_ws, csv_file), low_memory=False)
@@ -32,6 +33,8 @@ def process_csv_files(model_ws="."):
             df.index.name = "datetime"
             df.to_csv(os.path.join(model_ws, csv_file))
         # print(csv_file)
+        if "budget" in csv_file:
+            bd_df = df
         if "sv.gwf.wt.csv" in csv_file:
             wt_df = df
         elif "sv.gwf.aq.csv" in csv_file:
@@ -51,6 +54,15 @@ def process_csv_files(model_ws="."):
             #    raise Exception("#shitsbusted")
             swgw_dfs.append(swgw_df)
 
+    wel_hist = None
+    if bd_df is not None:
+        if "datetime" in bd_df.columns:
+            bd_df.index = pd.to_datetime(bd_df.pop("datetime"))
+        bd_df = bd_df.loc[:, bd_df.columns.str.contains("wel")]
+        wel_hist = bd_df.loc[bd_df.index.year < 2015, :].values.sum()
+        wel_pred = bd_df.loc[bd_df.index.year <= 2015, :].values.sum()
+        wel_diff = wel_hist - wel_pred
+
     if swgw_dfs is not None:
         df = pd.concat(swgw_dfs, axis=1)
         hist_mean = df.loc[(df.index.year < 2015) & (df.index.year >= 2010), :].mean()
@@ -64,6 +76,10 @@ def process_csv_files(model_ws="."):
             }
         )
         df.index.name = "quantity"
+        if wel_hist is not None:
+            df.loc["wel-sum", "hist-mean"] = wel_hist
+            df.loc["wel-sum", "pred-mean"] = wel_pred
+            df.loc["wel-sum", "diff-mean"] = wel_diff
         df.to_csv(os.path.join(model_ws, "swgw-longterm-means.csv"))
 
     if aq_df is not None and wt_df is not None:
