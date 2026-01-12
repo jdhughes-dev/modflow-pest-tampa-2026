@@ -65,7 +65,7 @@ conda activate tampa26mf6pp
 
 and then running:
 ```
-get-modflow -repo modflow6-nightly-build --ostag win64ext :python
+get-modflow --repo modflow6-nightly-build --ostag win64ext :python
 ```
 
 and then running:
@@ -75,7 +75,7 @@ get-modflow --subset gridgen,triangle :python
 
 and finally running:
 ```
-get-pestpp :python
+get-pestpp --release-id 5.2.25 :python
 ```
 
 You can also download the extended version of MODFLOW 6 from [here](https://github.com/MODFLOW-ORG/modflow6/releases). 
