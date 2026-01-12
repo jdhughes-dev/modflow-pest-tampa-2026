@@ -59,9 +59,11 @@ def process_csv_files(model_ws="."):
         if "datetime" in bd_df.columns:
             bd_df.index = pd.to_datetime(bd_df.pop("datetime"))
         bd_df = bd_df.loc[:, bd_df.columns.str.contains("wel")]
+        print(bd_df)
         wel_hist = bd_df.loc[bd_df.index.year < 2015, :].values.sum()
-        wel_pred = bd_df.loc[bd_df.index.year <= 2015, :].values.sum()
+        wel_pred = bd_df.loc[bd_df.index.year >= 2015, :].values.sum()
         wel_diff = wel_hist - wel_pred
+        print(wel_hist, wel_pred, wel_diff)
 
     if swgw_dfs is not None:
         df = pd.concat(swgw_dfs, axis=1)
@@ -80,6 +82,7 @@ def process_csv_files(model_ws="."):
             df.loc["wel-sum", "hist-mean"] = wel_hist
             df.loc["wel-sum", "pred-mean"] = wel_pred
             df.loc["wel-sum", "diff-mean"] = wel_diff
+            print(wel_hist, wel_pred, wel_diff)
         df.to_csv(os.path.join(model_ws, "swgw-longterm-means.csv"))
 
     if aq_df is not None and wt_df is not None:
@@ -493,9 +496,10 @@ def plot_ies_forecasts(m_d, noptmax=None):
 
 if __name__ == "__main__":
     # process_csv_files(os.path.join("..","models","synthetic-valley-truth-advanced-monthly"))
-    extract_true_obs(
-        os.path.join("..", "models", "synthetic-valley-truth-advanced-monthly")
-    )
+    process_csv_files(os.path.join("model_and_pest_files_opt"))
+    # extract_true_obs(
+    #    os.path.join("..", "models", "synthetic-valley-truth-advanced-monthly")
+    # )
     # fig,axes = plot_ies_properties("master_ies_advanced","sto-ss-layer1",noptmax=None)
     # plt.savefig("test.pdf")
     # plt.close(fig)
