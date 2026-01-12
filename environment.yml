@@ -45,6 +45,7 @@ dependencies:
   - pymetis
   - scikit-learn
   - pyarrow
+  - git
 
   # pre-commit
   - pre-commit

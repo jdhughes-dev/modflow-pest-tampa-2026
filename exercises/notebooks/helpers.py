@@ -504,9 +504,9 @@ def plot_ies_forecasts(m_d, noptmax=None, include_t=False):
 if __name__ == "__main__":
     # process_csv_files(os.path.join("..","models","synthetic-valley-truth-advanced-monthly"))
     # process_csv_files(os.path.join("model_and_pest_files_opt"))
-    # extract_true_obs(
-    #    os.path.join("..", "models", "synthetic-valley-truth-advanced-monthly")
-    # )
+    extract_true_obs(
+        os.path.join("..", "models", "synthetic-valley-truth-advanced-monthly")
+    )
     # fig,axes = plot_ies_properties("master_ies_advanced","sto-ss-layer1",noptmax=None)
     # plt.savefig("test.pdf")
     # plt.close(fig)
