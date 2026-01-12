@@ -427,14 +427,15 @@ def plot_ies_timeseries(m_d, noptmax=None):
             plt.close(fig)
 
 
-def plot_ies_forecasts(m_d, noptmax=None):
+def plot_ies_forecasts(m_d, noptmax=None, include_t=False):
     pst = pyemu.Pst(os.path.join(m_d, "pest.pst"))
     obs = pst.observation_data
     fobs = obs.loc[obs.oname == "forecasts", :]
     assert len(fobs) > 0
     quans = fobs.quantity.unique()
     quans.sort()
-    # print(quans)
+    quans = [q for q in quans if "wel" not in q]
+    print(quans)
 
     pr = pst.ies.obsen0
     pt = None
@@ -473,11 +474,17 @@ def plot_ies_forecasts(m_d, noptmax=None):
                     pr.loc[:, oname].values, bins=20, fc="0.5", alpha=0.5, label="prior"
                 )
                 # ax.set_xlim(xlim)
-                tval = uobs.loc[oname, "obsval"]
-                # print(quan,usecol,tval)
-                ax.plot(
-                    [tval, tval], ax.get_ylim(), "k--", lw=2, label="truth", zorder=10
-                )
+                if include_t:
+                    tval = uobs.loc[oname, "obsval"]
+                    # print(quan,usecol,tval)
+                    ax.plot(
+                        [tval, tval],
+                        ax.get_ylim(),
+                        "k--",
+                        lw=2,
+                        label="truth",
+                        zorder=10,
+                    )
                 ax.legend(loc="upper right")
                 ax.set_yticks([])
                 ax.grid("off")
@@ -488,7 +495,7 @@ def plot_ies_forecasts(m_d, noptmax=None):
 
             plt.tight_layout()
             pdf.savefig()
-            # plt.close(fig)
+
             figs.append(fig)
             axess.append(axes)
         return figs, axes
@@ -496,7 +503,7 @@ def plot_ies_forecasts(m_d, noptmax=None):
 
 if __name__ == "__main__":
     # process_csv_files(os.path.join("..","models","synthetic-valley-truth-advanced-monthly"))
-    process_csv_files(os.path.join("model_and_pest_files_opt"))
+    # process_csv_files(os.path.join("model_and_pest_files_opt"))
     # extract_true_obs(
     #    os.path.join("..", "models", "synthetic-valley-truth-advanced-monthly")
     # )
@@ -504,4 +511,4 @@ if __name__ == "__main__":
     # plt.savefig("test.pdf")
     # plt.close(fig)
     # plot_ies_timeseries("master_ies_base_mm", noptmax=None)
-    # plot_ies_forecasts("master_ies_base_mm", noptmax=None)
+    plot_ies_forecasts("master_ies_advanced", noptmax=None)
