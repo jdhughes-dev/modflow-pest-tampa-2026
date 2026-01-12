@@ -7,10 +7,12 @@ echo "Update pc files..."
 cd installation
 python update_pc_files.py
 
-
 # get a few additional executables needed for the class
 echo "\nGet gridgen and triangle..."
 get-modflow --subset gridgen,triangle :python
+
+echo "\nGet PEST++..."
+get-pestpp :python
 
 # return to starting directory
 cd "$START_DIR"
