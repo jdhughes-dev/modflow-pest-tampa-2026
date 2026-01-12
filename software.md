@@ -69,7 +69,7 @@ We will be using the extended version of MODFLOW 6 in this workshop.
 If you are working on Windows, you can install the extended version of MODFLOW 6 by activating the workshop environment using:
 
 ```
-conda activate madison25flopy
+conda activate  | tampa26mf6pp
 ```
 
 and then running:
@@ -77,9 +77,14 @@ and then running:
 get-modflow -repo modflow6-nightly-build --ostag win64ext :python
 ```
 
-and finally running:
+and then running:
 ```
 get-modflow --subset gridgen,triangle :python
+```
+
+and finally running:
+```
+get-pestpp :python
 ```
 
 You can also download the extended version of MODFLOW 6 from [here](https://github.com/MODFLOW-ORG/modflow6/releases).  
