@@ -59,7 +59,7 @@ def process_csv_files(model_ws="."):
         if "datetime" in bd_df.columns:
             bd_df.index = pd.to_datetime(bd_df.pop("datetime"))
         bd_df = bd_df.loc[:, bd_df.columns.str.contains("wel")]
-        print(bd_df)
+        # print(bd_df)
         wel_hist = bd_df.loc[bd_df.index.year < 2015, :].values.sum()
         wel_pred = bd_df.loc[bd_df.index.year >= 2015, :].values.sum()
         wel_diff = wel_hist - wel_pred
