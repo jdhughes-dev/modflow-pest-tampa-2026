@@ -1,0 +1,17 @@
+  wt01-i2-j17  head  1 3 18
+  wt02-i3-j10  head  1 4 11
+  wt03-i6-j20  head  1 7 21
+  wt04-i12-j22  head  1 13 23
+  wt05-i14-j11  head  1 15 12
+  wt06-i16-j18  head  1 17 19
+  wt07-i17-j1  head  1 18 2
+  wt08-i18-j6  head  1 19 7
+  wt09-i19-j11  head  1 20 12
+  wt10-i18-j22  head  1 19 23
+  wt11-i26-j5  head  1 27 6
+  wt12-i27-j11  head  1 28 12
+  wt13-i28-j23  head  1 29 24
+  wt14-i30-j6  head  1 31 7
+  wt15-i33-j14  head  1 34 15
+  wt16-i36-j1  head  1 37 2
+  wt17-i37-j22  head  1 38 23
