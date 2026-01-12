@@ -6,22 +6,6 @@
 
 Tuesday January 20, 2026 8:00 AM - Friday January 23, 2026 2:00 PM
 
-## Install instructions
-
-0) install mini-forge.  See instructions here: [https://github.com/conda-forge/miniforge](https://github.com/conda-forge/miniforge)
-1) clone/download this repo and open a terminal/cmd window in that dir (you might have to use the Miniforge Prompt on windows)
-2) create the `tampa26mf6pp` environment: `mamba env create -f environment.yml`
-3) activate the environment: `mamba activate tampa26mf6pp`
-4) install modflow6: `get-modflow --repo modflow6-nightly-build :python`
-5) install pest++: `get-pestpp --release-id 5.2.25 :python`
-6) check that mf6 and pestpp-ies are working by calling the following executables
-  - `mf6`
-  - `pestpp-ies`
-  - `pestpp-opt`
-7) check that the jupyter notebook is working properly by calling `jupyter notebook`
-
-If you made it this far...#winning
-
 
 ### <u>Tentative training agenda</u>:
 

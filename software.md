@@ -1,5 +1,5 @@
 # Software Installation
-Class participants will need to come prepared with a laptop computer that has Python installed. **If you are familiar with conda environments and know how to create a new conda environment using an environment.yml file, then skip ahead to Part 3**. For all others, we recommend using the Miniforge software to download and install Python and required dependencies needed for the workshop. 
+Class participants will need to come prepared with a laptop computer that has Python installed. **If you are familiar with mamba environments and know how to create a new mamba environment using an environment.yml file, then skip ahead to Part 3**. For all others, we recommend using the Miniforge software to download and install Python and required dependencies needed for the workshop. 
 
 The following instructions will guide you through the installation process and setup of a `tampa26mf6pp` environment and downloading the class materials.
 
@@ -35,7 +35,7 @@ mamba env create --file <path to file>/environment.yml
 
 3. After the environment has been installed, you may activate this new class environment with the following command
 ```
-conda activate tampa26mf6pp
+mamba activate tampa26mf6pp
 ```
 
 4. The windows terminal prompt should reflect the current environment:
@@ -60,7 +60,7 @@ We will be using the extended version of MODFLOW 6 in this workshop.
 If you are working on Windows, you can install the extended version of MODFLOW 6 by activating the workshop environment using:
 
 ```
-conda activate tampa26mf6pp
+mamba activate tampa26mf6pp
 ```
 
 and then running:
@@ -93,7 +93,7 @@ git clone https://github.com/jdhughes-dev/modflow-pest-tampa-2026.git
 
 2. Activate the tampa26mf6pp environment
 ```
-conda activate tampa26mf6pp
+mamba activate tampa26mf6pp
 ```
 
 3. Navigate to the root directory of the workshop GitHub repository and run the MODFLOW 6 build script using:
