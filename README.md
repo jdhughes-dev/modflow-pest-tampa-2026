@@ -64,3 +64,6 @@ If you made it this far...#winning
 | 11:00 AM | 12:00 PM | **Hands-on** | running experiments with opt to understand how bounds and constraints influence results
 | 1:00 PM | 2:00 PM | **Discussion** | bring your questions!
 
+## Software
+
+We will be using Jupyter notebooks during the class.  Software installation instructions for the class are included [here](./software.md).

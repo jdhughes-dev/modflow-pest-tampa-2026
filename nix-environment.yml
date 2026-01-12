@@ -1,0 +1,69 @@
+name: tampa26mf6pp
+channels:
+  - conda-forge
+  - nodefaults
+dependencies:
+
+  # primary dependencies
+  - python >=3.10
+  - numpy >=2.0.0
+  - matplotlib >=1.4.0
+  - pandas >=2.0.0
+  - scipy
+  - flopy >= 3.7.0
+
+  # other useful packages
+  - pip
+  - jupyter
+  - jupytext
+  - jupyterlab
+  - openpyxl
+  - xlrd
+  - netcdf4
+  - pyshp
+  - rasterio
+  - rasterstats
+  - fiona
+  - descartes
+  - pyproj
+  - shapely
+  - geos
+  - geojson
+  - geopandas
+  - xarray
+  - rioxarray
+  - uxarray
+  - pyyaml
+  - rtree
+  - pyvista
+  - vtk
+  - imageio
+  - requests
+  - pytest
+  - statsmodels
+  - modflowapi
+  - pymetis
+  - scikit-learn
+  - pyarrow
+
+  # pre-commit
+  - pre-commit
+  - nbstripout
+  - ruff
+  - jupyterlab_code_formatter
+
+  # build dependencies
+  - pkg-config
+  - meson
+  - ninja
+  - gfortran
+  - openmpi
+  - libnetcdf
+  - netcdf-fortran
+  - petsc=3.20.5
+
+  - pip:
+       - pypestutils
+       - git+https://github.com/jtwhite79/pyemu.git@feat_lesswarn
+       - git+https://github.com/INTERA-Inc/mf6adj.git@develop
+
