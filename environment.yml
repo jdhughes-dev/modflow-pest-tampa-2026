@@ -46,6 +46,7 @@ dependencies:
   - scikit-learn
   - pyarrow
   - git
+  - nbconvert
 
   # pre-commit
   - pre-commit
