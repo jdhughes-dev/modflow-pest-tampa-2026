@@ -1,2 +1,4 @@
+  1  status  active
+  2  status  active
   1  rate  -52083.50383632
   2  rate  -2.08334015E+05

@@ -6,6 +6,7 @@
 
 Tuesday January 20, 2026 8:00 AM - Friday January 23, 2026 2:00 PM
 
+
 ### <u>Tentative training agenda</u>:
 
 #### __Tuesday - MODFLOW 6__

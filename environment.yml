@@ -45,6 +45,8 @@ dependencies:
   - pymetis
   - scikit-learn
   - pyarrow
+  - git
+  - nbconvert
 
   # pre-commit
   - pre-commit
@@ -53,5 +55,5 @@ dependencies:
   - jupyterlab_code_formatter
   - pip:
        - pypestutils
-       - git+https://github.com/jtwhite79/pyemu.git@feat_lesswarn
+       - git+https://github.com/pypest/pyemu.git@develop
        - git+https://github.com/INTERA-Inc/mf6adj.git@develop

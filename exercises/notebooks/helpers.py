@@ -16,9 +16,11 @@ def process_csv_files(model_ws="."):
     csv_files = [f for f in os.listdir(model_ws) if f.endswith(".csv")]
     aq_df = None
     wt_df = None
+    swgw_dfs = []
+    bd_df = None
     for csv_file in csv_files:
         try:
-            df = pd.read_csv(os.path.join(model_ws, csv_file))
+            df = pd.read_csv(os.path.join(model_ws, csv_file), low_memory=False)
         except Exception:
             continue
         df.columns = df.columns.map(
@@ -31,10 +33,58 @@ def process_csv_files(model_ws="."):
             df.index.name = "datetime"
             df.to_csv(os.path.join(model_ws, csv_file))
         # print(csv_file)
+        if "budget" in csv_file:
+            bd_df = df
         if "sv.gwf.wt.csv" in csv_file:
             wt_df = df
         elif "sv.gwf.aq.csv" in csv_file:
             aq_df = df
+        swgw_df = df.loc[
+            :,
+            (df.columns.str.contains("riv-swgw"))
+            | (df.columns.str.contains("lake-stage")),
+        ]
+        # print(csv_file,swgw_df.shape)
+        if swgw_df.shape[1] > 0 and csv_file.startswith("sv"):
+            if "datetime" in df.columns:
+                swgw_df.index = pd.to_datetime(df.datetime)
+            # print(swgw_df)
+            print("found", csv_file)
+            # if rivswgw_df is not None:
+            #    raise Exception("#shitsbusted")
+            swgw_dfs.append(swgw_df)
+
+    wel_hist = None
+    if bd_df is not None:
+        if "datetime" in bd_df.columns:
+            bd_df.index = pd.to_datetime(bd_df.pop("datetime"))
+        bd_df = bd_df.loc[:, bd_df.columns.str.contains("wel")]
+        # print(bd_df)
+        wel_hist = bd_df.loc[bd_df.index.year < 2015, :].values.sum()
+        wel_pred = bd_df.loc[bd_df.index.year >= 2015, :].values.sum()
+        wel_diff = wel_hist - wel_pred
+        print(wel_hist, wel_pred, wel_diff)
+
+    if swgw_dfs is not None:
+        df = pd.concat(swgw_dfs, axis=1)
+        hist_mean = df.loc[(df.index.year < 2015) & (df.index.year >= 2010), :].mean()
+        pred_mean = df.loc[df.index.year > 2019, :].mean()
+        diff_mean = hist_mean - pred_mean
+        df = pd.DataFrame(
+            data={
+                "hist-mean": hist_mean,
+                "pred-mean": pred_mean,
+                "diff-mean": diff_mean,
+            }
+        )
+        df.index.name = "quantity"
+        if wel_hist is not None:
+            df.loc["wel-sum", "hist-mean"] = wel_hist
+            df.loc["wel-sum", "pred-mean"] = wel_pred
+            df.loc["wel-sum", "diff-mean"] = wel_diff
+            print(wel_hist, wel_pred, wel_diff)
+        df.to_csv(os.path.join(model_ws, "swgw-longterm-means.csv"))
+
     if aq_df is not None and wt_df is not None:
         # print(wt_df)
         # print(aq_df)
@@ -166,12 +216,15 @@ def plot_ies_timeseries(m_d, noptmax=None):
     )
     pst = pyemu.Pst(os.path.join(m_d, "pest.pst"))
     obs = pst.observation_data
-    sgobs = obs.loc[obs.obsnme.str.contains("swgw"), :].copy()
+    sgobs = obs.loc[pd.notna(obs.usecol), :]
+    sgobs = sgobs.loc[sgobs.usecol.str.contains("swgw"), :].copy()
     sgobs["datetime"] = pd.to_datetime(sgobs.datetime)
     sg_grps = sgobs.obgnme.unique()
     sg_grps.sort()
+    # print(sg_grps)
+    # exit()
 
-    lkobs = obs.loc[obs.obsnme.str.contains("lake-stage"), :].copy()
+    lkobs = obs.loc[obs.usecol == "lake-stage", :].copy()
     lkobs["datetime"] = pd.to_datetime(lkobs.datetime)
     lkobs.sort_values(by="datetime", inplace=True)
 
@@ -333,7 +386,7 @@ def plot_ies_timeseries(m_d, noptmax=None):
             dobs.sort_values(by="datetime", inplace=True)
 
             fig, axes = plt.subplots(3, 1, figsize=(10, 10))
-            for ax, oobs, grp in zip(axes, [aobs, wobs, dobs], [agrp, wgrp, dgrp]):
+            for ax, oobs, grp in zip(axes, [wobs, aobs, dobs], [wgrp, agrp, dgrp]):
                 dts = oobs.datetime.values
 
                 nzobs = oobs.loc[oobs.weight > 0, :].copy()
@@ -374,11 +427,88 @@ def plot_ies_timeseries(m_d, noptmax=None):
             plt.close(fig)
 
 
+def plot_ies_forecasts(m_d, noptmax=None, include_t=False):
+    pst = pyemu.Pst(os.path.join(m_d, "pest.pst"))
+    obs = pst.observation_data
+    fobs = obs.loc[obs.oname == "forecasts", :]
+    assert len(fobs) > 0
+    quans = fobs.quantity.unique()
+    quans.sort()
+    quans = [q for q in quans if "wel" not in q]
+    print(quans)
+
+    pr = pst.ies.obsen0
+    pt = None
+    if noptmax != 0 and pst.ies.phiactual.iteration.max() > 0:
+        if noptmax is None:
+            noptmax = pst.ies.phiactual.iteration.max()
+        pt = pst.ies.get("obsen", noptmax)
+
+    usecol_order = ["hist-mean", "pred-mean", "diff-mean"]
+    for u in usecol_order:
+        assert u in fobs.usecol.unique()
+    figs, axess = [], []
+    with PdfPages(os.path.join(m_d, "forecasts.pdf")) as pdf:
+        for quan in quans:
+            uobs = fobs.loc[fobs.quantity == quan, :]
+            uobs.sort_index(inplace=True)
+
+            fig, axes = plt.subplots(len(uobs), 1, figsize=(8, 2 * len(uobs)))
+            if len(uobs) == 1:
+                axes = [axes]
+            for ax, usecol in zip(axes, usecol_order):
+                oname = uobs.loc[uobs.usecol == usecol, "obsnme"]
+
+                if pt is not None:
+                    ax.hist(
+                        pt.loc[:, oname].values,
+                        bins=20,
+                        fc="b",
+                        alpha=0.5,
+                        label="posterior",
+                    )
+
+                ax.set_title("{0} {1}".format(quan, usecol), loc="left")
+                # xlim = ax.get_xlim()
+                ax.hist(
+                    pr.loc[:, oname].values, bins=20, fc="0.5", alpha=0.5, label="prior"
+                )
+                # ax.set_xlim(xlim)
+                if include_t:
+                    tval = uobs.loc[oname, "obsval"]
+                    # print(quan,usecol,tval)
+                    ax.plot(
+                        [tval, tval],
+                        ax.get_ylim(),
+                        "k--",
+                        lw=2,
+                        label="truth",
+                        zorder=10,
+                    )
+                ax.legend(loc="upper right")
+                ax.set_yticks([])
+                ax.grid("off")
+            mx = max([ax.get_xlim()[1] for ax in axes[:-1]])
+            mn = min([ax.get_xlim()[0] for ax in axes[:-1]])
+            axes[0].set_xlim(mn, mx)
+            axes[1].set_xlim(mn, mx)
+
+            plt.tight_layout()
+            pdf.savefig()
+
+            figs.append(fig)
+            axess.append(axes)
+        return figs, axes
+
+
 if __name__ == "__main__":
-    # extract_true_obs(
-    #    os.path.join("..", "models", "synthetic-valley-truth-advanced-monthly")
-    # )
+    # process_csv_files(os.path.join("..","models","synthetic-valley-truth-advanced-monthly"))
+    # process_csv_files(os.path.join("model_and_pest_files_opt"))
+    extract_true_obs(
+        os.path.join("..", "models", "synthetic-valley-truth-advanced-monthly")
+    )
     # fig,axes = plot_ies_properties("master_ies_advanced","sto-ss-layer1",noptmax=None)
     # plt.savefig("test.pdf")
     # plt.close(fig)
-    plot_ies_timeseries("master_ies_advanced", noptmax=None)
+    # plot_ies_timeseries("master_ies_base_mm", noptmax=None)
+    plot_ies_forecasts("master_ies_advanced", noptmax=None)
