@@ -25,7 +25,7 @@ Using a text editor, create a file called `environment.yml`. It should contain t
 
 ## Part 4 -- Create the `tampa26mf6pp` Environment
 
-1. Start the miniforge prompt from the Windows start menu (or equivalent on Mac or Linux) to bring up a terminal.
+1. Start the miniforge prompt from the Windows start menu (or equivalent on Mac/Linux) to bring up a terminal.
 
 2. At the terminal prompt enter the following command, where `<path to file>` is the location of the `environment.yml` file that you created in Part 2. You will need to be connected to the internet for this to work properly. The installation process may take a couple of minutes.
 ```
