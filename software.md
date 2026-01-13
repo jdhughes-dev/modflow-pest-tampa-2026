@@ -1,30 +1,29 @@
 # Software Installation
-Class participants will need to come prepared with a laptop computer that has Python installed. **If you are familiar with mamba environments and know how to create a new mamba environment using an environment.yml file, then skip ahead to Part 3**. For all others, we recommend using the Miniforge software to download and install Python and required dependencies needed for the workshop. 
+Class participants will need to come prepared with a laptop computer that has Python installed. **If you are familiar with mamba environments and know how to create a new mamba environment using an environment.yml file, then skip ahead to Part 2**. For all others, we recommend using the Miniforge software to download and install Python and required dependencies needed for the class. 
 
 The following instructions will guide you through the installation process and setup of a `tampa26mf6pp` environment and downloading the class materials.
 
-## Part 1 -- Install git
-
-If `git` is not installed, instructions for installing `git` can be found at [https://git-scm.com/downloads](https://git-scm.com/downloads).
-
-## Part 2 -- Install Miniforge
+## Part 1 -- Install Miniforge
 1. Download and run the Miniforge installer (https://github.com/conda-forge/miniforge) for your operating system.
 
 2. Click through the installer options, and select "Just Me (recommended)" if asked. Default installation options should be fine, with the exception that you should select an installation location that does not have any special characters or spaces in it.
 
-3. After installation, you should see "Miniforge Prompt" as a program under the Windows Start menu.
+3. If using Windows, you should see "Miniforge Prompt" as a program under the Windows Start menu after installation.
+
+## Part 2 -- Install git
+
+If `git` is not installed on your laptop, instructions for installing `git` can be found at [https://git-scm.com/downloads](https://git-scm.com/downloads).
 
 ## Part 3 -- Create an Environment File
 We will use an environment file to create a containerized version of Python and the Python packages needed for the class. An environment file is simply a list of packages that we want to install in our environment.
 
 ### Windows
-Using a text editor, such as Notepad or Notepad++, create a file called `environment.yml`. It should contain the information in [this environment file](https://github.com/jdhughes-dev/modflow-pest-tampa-2026/blob/main/environment.yml). Save this file to your hard drive, preferably in your user home folder so that it can be easily accessed in the next step. (Caution!  Notepad will automatically append a .txt suffix to your file name; you don't want this to happen.)
+Using a text editor, such as Notepad or Notepad++, create a file called `environment.yml`. It should contain the information in [this Windows specific environment file](https://github.com/jdhughes-dev/modflow-pest-tampa-2026/blob/main/environment.yml). Save this file to your hard drive, preferably in your user home folder so that it can be easily accessed in the next step. (Caution!  Notepad will automatically append a .txt suffix to your file name; you don't want this to happen.)
 
 ### Mac and Linux
-Using a text editor, create a file called `environment.yml`. It should contain the information in [this environment file](https://github.com/jdhughes-dev/modflow-pest-tampa-2026/blob/main/nix-environment.yml). Save this file to your hard drive, preferably in your user home folder so that it can be easily accessed in the next step.
+Using a text editor, create a file called `environment.yml`. It should contain the information in [this Mac/Linux specific environment file](https://github.com/jdhughes-dev/modflow-pest-tampa-2026/blob/main/nix-environment.yml). Save this file to your hard drive, preferably in your user home folder so that it can be easily accessed in the next step.
 
-
-## Part 4. Create the `tampa26mf6pp` Environment
+## Part 4 -- Create the `tampa26mf6pp` Environment
 
 1. Start the miniforge prompt from the Windows start menu (or equivalent on Mac or Linux) to bring up a terminal.
 
@@ -43,21 +42,27 @@ mamba activate tampa26mf6pp
 (tampa26mf6pp) C:\Users\JaneDoe>
 ```
 
-5. We will be using jupyter notebooks in the workshop. To test if jupyter is installed and working properly use the following command. After entering this command, the default web browswer should open to a Jupyter Lab page.
+5. To test if jupyter is installed and working properly use the following command. After entering this command, the default web browser should open to a Jupyter Lab page.
 ```
 jupyter lab
 ```
 
-For most users, the setup is complete at this point. For those working on a Mac or Linux laptop, please proceed to Part 6.
+## Part 5 -- Clone the class repo 
+
+Start a CMD shell (Windows) or open a terminal (Mac and Linux) and clone the class repo using the following command:
+
+```
+git clone https://github.com/jdhughes-dev/modflow-pest-tampa-2026.git
+```
 
 
-## Part 5. Obtaining MODFLOW 6 and PEST++
+## Part 6 -- Obtaining MODFLOW 6 and PEST++
 
-We will be using the extended version of MODFLOW 6 in this workshop. 
+We will be using the extended version of MODFLOW 6 in this class. 
 
 ### Windows
 
-If you are working on Windows, you can install the extended version of MODFLOW 6 by activating the workshop environment using:
+If you are working on Windows, you can install the extended version of MODFLOW 6, PEST++, and a few utility programs by activating the class environment using:
 
 ```
 mamba activate tampa26mf6pp
@@ -70,38 +75,31 @@ get-modflow --repo modflow6-nightly-build --ostag win64ext :python
 
 and then running:
 ```
-get-modflow --subset gridgen,triangle :python
+get-pestpp --release-id 5.2.25 :python
 ```
 
 and finally running:
 ```
-get-pestpp --release-id 5.2.25 :python
+get-modflow --subset gridgen,triangle :python
 ```
 
-You can also download the extended version of MODFLOW 6 from [here](https://github.com/MODFLOW-ORG/modflow6/releases). 
-
-Note that we will also walk through this step during the workshop. The distribution file for windows that includes the parallel version is called `win64ext.zip`.
+Note that we will also walk through this step during the class.
 
 ### Mac and Linux
 
-If you are using a Mac or Linux laptop for the workshop, then you will need to build the parallel version of MODFLOW. We have simplified the build process, which can be completed in just a few minutes. You will need to install git on your laptop if you don't already have it. 
+If you are working on a Mac or Linux laptop, then you will need to build the parallel version of MODFLOW. We have simplified the build process, which can be completed in just a few minutes. 
 
-1. Download the workshop GitHub repository using:
-```
-git clone https://github.com/jdhughes-dev/modflow-pest-tampa-2026.git
-```
-
-2. Activate the tampa26mf6pp environment
+1. Activate the class environment
 ```
 mamba activate tampa26mf6pp
 ```
 
-3. Navigate to the root directory of the workshop GitHub repository and run the MODFLOW 6 build script using:
+2. Navigate to the root directory of the class GitHub repository and run the MODFLOW 6 build script using:
 ```
 sh nix-build.sh  
 ```
 
-4. If the build is successful you should see the following:
+3. If the build is successful you should see the following:
 ```
  Normal termination of simulation.
 ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――
@@ -116,14 +114,6 @@ Full log written to /path/to/the/class/github/repo/modflow-pest-tampa-2026/modfl
 Finished...
 
 
-```
-
-## Part 6. Clone the class repo 
-
-On Windows, start a CMD shell and clone the class repo using the following command:
-
-```
-git clone https://github.com/jdhughes-dev/modflow-pest-tampa-2026.git
 ```
 
 
