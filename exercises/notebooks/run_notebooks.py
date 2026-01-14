@@ -58,3 +58,6 @@ run_nb(nb_file, nb_dir)
 
 nb_file = "SV_run_opt.ipynb"
 run_nb(nb_file, nb_dir)
+
+nb_file = "SV_run_dsi.ipynb"
+run_nb(nb_file, nb_dir)
