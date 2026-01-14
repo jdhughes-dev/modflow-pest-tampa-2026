@@ -206,7 +206,7 @@ def plot_ies_properties(m_d, tag, noptmax=None):
     return fig, axes
 
 
-def plot_ies_timeseries(m_d, noptmax=None):
+def plot_ies_timeseries(m_d, pst_name="pest.pst", noptmax=None, include_t=False):
     truth_obs = pd.read_csv(
         os.path.join(
             "..", "models", "synthetic-valley-truth-advanced-monthly", "raw_obs.csv"
@@ -214,7 +214,7 @@ def plot_ies_timeseries(m_d, noptmax=None):
         index_col=0,
         parse_dates=True,
     )
-    pst = pyemu.Pst(os.path.join(m_d, "pest.pst"))
+    pst = pyemu.Pst(os.path.join(m_d, pst_name))
     obs = pst.observation_data
     sgobs = obs.loc[pd.notna(obs.usecol), :]
     sgobs = sgobs.loc[sgobs.usecol.str.contains("swgw"), :].copy()
@@ -290,8 +290,9 @@ def plot_ies_timeseries(m_d, noptmax=None):
                 ax.plot(dts, vals[-1, :], "b", lw=0.2, label="posterior")
             # ax.plot(dts, oobs.obsval, "r--", lw=2, label="truth")
             usecol = oobs.usecol.unique()
-            tobs = truth_obs.loc[:, usecol]
-            ax.plot(tobs.index, tobs.values, "k--", lw=2, label="truth", zorder=10)
+            if include_t:
+                tobs = truth_obs.loc[:, usecol]
+                ax.plot(tobs.index, tobs.values, "k--", lw=2, label="truth", zorder=10)
             ax.set_title(grp, loc="left")
             ax.legend(loc="upper right")
             ax.grid()
@@ -327,8 +328,9 @@ def plot_ies_timeseries(m_d, noptmax=None):
             ax.plot(dts, vals[-1, :], "b", lw=0.2, label="posterior")
         # ax.plot(dts, oobs.obsval, "r--", lw=2, label="truth")
         usecol = oobs.usecol.unique()
-        tobs = truth_obs.loc[:, usecol]
-        ax.plot(tobs.index, tobs.values, "k--", lw=2, label="truth", zorder=10)
+        if include_t:
+            tobs = truth_obs.loc[:, usecol]
+            ax.plot(tobs.index, tobs.values, "k--", lw=2, label="truth", zorder=10)
         ax.set_title("lake-stage", loc="left")
         ax.legend(loc="upper right")
         ax.grid()
@@ -364,8 +366,9 @@ def plot_ies_timeseries(m_d, noptmax=None):
             ax.plot(dts, vals[-1, :], "b", lw=0.2, label="posterior")
         # ax.plot(dts, oobs.obsval, "r--", lw=2, label="truth")
         usecol = oobs.usecol.unique()
-        tobs = truth_obs.loc[:, usecol]
-        ax.plot(tobs.index, tobs.values, "k--", lw=2, label="truth", zorder=10)
+        if include_t:
+            tobs = truth_obs.loc[:, usecol]
+            ax.plot(tobs.index, tobs.values, "k--", lw=2, label="truth", zorder=10)
         ax.set_title("riv-flow", loc="left")
         ax.legend(loc="upper right")
         ax.grid()
@@ -409,8 +412,11 @@ def plot_ies_timeseries(m_d, noptmax=None):
                     ax.plot(dts, vals[-1, :], "b", lw=0.2, label="posterior")
                 # ax.plot(dts, oobs.obsval, "r--", lw=2, label="truth")
                 usecol = oobs.usecol.unique()
-                tobs = truth_obs.loc[:, usecol]
-                ax.plot(tobs.index, tobs.values, "k--", lw=2, label="truth", zorder=10)
+                if include_t:
+                    tobs = truth_obs.loc[:, usecol]
+                    ax.plot(
+                        tobs.index, tobs.values, "k--", lw=2, label="truth", zorder=10
+                    )
                 ylim = ax.get_ylim()
                 vals = pr.loc[:, oobs.obsnme].values
                 [
@@ -427,8 +433,8 @@ def plot_ies_timeseries(m_d, noptmax=None):
             plt.close(fig)
 
 
-def plot_ies_forecasts(m_d, noptmax=None, include_t=False):
-    pst = pyemu.Pst(os.path.join(m_d, "pest.pst"))
+def plot_ies_forecasts(m_d, pst_name="pest.pst", noptmax=None, include_t=False):
+    pst = pyemu.Pst(os.path.join(m_d, pst_name))
     obs = pst.observation_data
     fobs = obs.loc[obs.oname == "forecasts", :]
     assert len(fobs) > 0
