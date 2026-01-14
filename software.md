@@ -6,7 +6,7 @@ The following instructions will guide you through the installation process and s
 ## Part 1 -- Install Miniforge
 1. Download and run the Miniforge installer (https://github.com/conda-forge/miniforge) for your operating system.
 
-2. Click through the installer options, and select "Just Me (recommended)" if asked. Default installation options should be fine, with the exception that you should select an installation location that does not have any special characters or spaces in it.
+2. Click through the installer options, and select "Just Me (recommended)" if asked. Default installation options should be fine, with the exception that you should select an installation location that does not have any special characters or spaces in it. **If you are working on Windows and if possible, installing Miniforge in `C:\miniforge\` will reduce the possibility of exceeding the maximimum file path length.**
 
 3. If using Windows, you should see "Miniforge Prompt" as a program under the Windows Start menu after installation.
 
