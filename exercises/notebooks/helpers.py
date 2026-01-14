@@ -124,8 +124,8 @@ def extract_true_obs(m_d):
     print(df)
 
 
-def plot_ies_properties(m_d, tag, noptmax=None):
-    pst = pyemu.Pst(os.path.join(m_d, "pest.pst"))
+def plot_ies_properties(m_d, tag, pst_name="pest.pst", noptmax=None):
+    pst = pyemu.Pst(os.path.join(m_d, pst_name))
     obs = pst.observation_data
     tobs = obs.loc[obs.obsnme.str.contains(tag), :].copy()
     assert len(tobs) > 0
