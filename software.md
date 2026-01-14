@@ -69,21 +69,30 @@ mamba activate tampa26mf6pp
 ```
 
 and then running:
+
 ```
 get-modflow --repo modflow6-nightly-build --ostag win64ext :python
 ```
 
 and then running:
+
 ```
 get-pestpp --release-id 5.2.25 :python
 ```
 
 and finally running:
+
 ```
 get-modflow --subset gridgen,triangle :python
 ```
 
-Note that we will also walk through this step during the class.
+**NOTE:** If you get a ssl error during this step, running
+
+```
+pip install pip-system-certs
+```
+
+in the class environment may resolve this issue. We will also walk through this step during the class to get the most recent nightly build of MODFLOW 6.
 
 ### Mac and Linux
 
