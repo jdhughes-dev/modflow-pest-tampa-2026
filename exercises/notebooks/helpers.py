@@ -290,9 +290,11 @@ def plot_ies_timeseries(m_d, pst_name="pest.pst", noptmax=None, include_t=False)
                 ax.plot(dts, vals[-1, :], "b", lw=0.2, label="posterior")
             # ax.plot(dts, oobs.obsval, "r--", lw=2, label="truth")
             usecol = oobs.usecol.unique()
-            if include_t:
-                tobs = truth_obs.loc[:, usecol]
-                ax.plot(tobs.index, tobs.values, "k--", lw=2, label="truth", zorder=10)
+            tobs = truth_obs.loc[:, usecol]
+            if not include_t:
+                tobs = tobs.loc[tobs.index.year < 2015]
+            ax.plot(tobs.index, tobs.values, "k--", lw=2, label="truth", zorder=10)
+
             ax.set_title(grp, loc="left")
             ax.legend(loc="upper right")
             ax.grid()
@@ -328,9 +330,10 @@ def plot_ies_timeseries(m_d, pst_name="pest.pst", noptmax=None, include_t=False)
             ax.plot(dts, vals[-1, :], "b", lw=0.2, label="posterior")
         # ax.plot(dts, oobs.obsval, "r--", lw=2, label="truth")
         usecol = oobs.usecol.unique()
-        if include_t:
-            tobs = truth_obs.loc[:, usecol]
-            ax.plot(tobs.index, tobs.values, "k--", lw=2, label="truth", zorder=10)
+        tobs = truth_obs.loc[:, usecol]
+        if not include_t:
+            tobs = tobs.loc[tobs.index.year < 2015]
+        ax.plot(tobs.index, tobs.values, "k--", lw=2, label="truth", zorder=10)
         ax.set_title("lake-stage", loc="left")
         ax.legend(loc="upper right")
         ax.grid()
@@ -366,9 +369,10 @@ def plot_ies_timeseries(m_d, pst_name="pest.pst", noptmax=None, include_t=False)
             ax.plot(dts, vals[-1, :], "b", lw=0.2, label="posterior")
         # ax.plot(dts, oobs.obsval, "r--", lw=2, label="truth")
         usecol = oobs.usecol.unique()
-        if include_t:
-            tobs = truth_obs.loc[:, usecol]
-            ax.plot(tobs.index, tobs.values, "k--", lw=2, label="truth", zorder=10)
+        tobs = truth_obs.loc[:, usecol]
+        if not include_t:
+            tobs = tobs.loc[tobs.index.year < 2015]
+        ax.plot(tobs.index, tobs.values, "k--", lw=2, label="truth", zorder=10)
         ax.set_title("riv-flow", loc="left")
         ax.legend(loc="upper right")
         ax.grid()
@@ -412,11 +416,10 @@ def plot_ies_timeseries(m_d, pst_name="pest.pst", noptmax=None, include_t=False)
                     ax.plot(dts, vals[-1, :], "b", lw=0.2, label="posterior")
                 # ax.plot(dts, oobs.obsval, "r--", lw=2, label="truth")
                 usecol = oobs.usecol.unique()
-                if include_t:
-                    tobs = truth_obs.loc[:, usecol]
-                    ax.plot(
-                        tobs.index, tobs.values, "k--", lw=2, label="truth", zorder=10
-                    )
+                tobs = truth_obs.loc[:, usecol]
+                if not include_t:
+                    tobs = tobs.loc[tobs.index.year < 2015]
+                ax.plot(tobs.index, tobs.values, "k--", lw=2, label="truth", zorder=10)
                 ylim = ax.get_ylim()
                 vals = pr.loc[:, oobs.obsnme].values
                 [
@@ -510,11 +513,11 @@ def plot_ies_forecasts(m_d, pst_name="pest.pst", noptmax=None, include_t=False):
 if __name__ == "__main__":
     # process_csv_files(os.path.join("..","models","synthetic-valley-truth-advanced-monthly"))
     # process_csv_files(os.path.join("model_and_pest_files_opt"))
-    extract_true_obs(
-        os.path.join("..", "models", "synthetic-valley-truth-advanced-monthly")
-    )
+    # extract_true_obs(
+    #    os.path.join("..", "models", "synthetic-valley-truth-advanced-monthly")
+    # )
     # fig,axes = plot_ies_properties("master_ies_advanced","sto-ss-layer1",noptmax=None)
     # plt.savefig("test.pdf")
     # plt.close(fig)
-    # plot_ies_timeseries("master_ies_base_mm", noptmax=None)
-    plot_ies_forecasts("master_ies_advanced", noptmax=None)
+    plot_ies_timeseries("master_ies_base", noptmax=None)
+    # plot_ies_forecasts("master_ies_advanced", noptmax=None)
