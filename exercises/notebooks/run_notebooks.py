@@ -46,6 +46,10 @@ def run_nb(nb_file, nb_dir="."):
 
 
 nb_dir = "."
+
+nb_file = "SV_advanced.ipynb"
+run_nb(nb_file, nb_dir)
+
 nb_file = "SV_setup_control_file.ipynb"
 run_nb(nb_file, nb_dir)
 

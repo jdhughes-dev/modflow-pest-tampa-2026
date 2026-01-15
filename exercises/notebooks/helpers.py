@@ -254,7 +254,6 @@ def plot_ies_timeseries(m_d, pst_name="pest.pst", noptmax=None, include_t=False)
         if noptmax is None:
             noptmax = pst.ies.phiactual.iteration.max()
         pt = pst.ies.get("obsen", noptmax)
-
     with PdfPages(os.path.join(m_d, "timeseries.pdf")) as pdf:
         fig, axes = plt.subplots(len(sg_grps), 1, figsize=(10, 5 * len(sg_grps)))
         if len(sg_grps) == 1:
