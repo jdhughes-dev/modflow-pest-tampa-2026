@@ -46,15 +46,18 @@ def run_nb(nb_file, nb_dir="."):
 
 
 nb_dir = "."
-nb_file = "SV_setup_control_file.ipynb"
+
+nb_file = "SV_advanced.ipynb"
 run_nb(nb_file, nb_dir)
 
-nb_dir = "."
-nb_file = "SV_obsvals_weights_noise.ipynb"
+nb_file = "SV_setup_control_file.ipynb"
 run_nb(nb_file, nb_dir)
 
 nb_file = "SV_run_ies.ipynb"
 run_nb(nb_file, nb_dir)
 
 nb_file = "SV_run_opt.ipynb"
+run_nb(nb_file, nb_dir)
+
+nb_file = "SV_run_dsi.ipynb"
 run_nb(nb_file, nb_dir)
