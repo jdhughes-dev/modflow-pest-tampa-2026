@@ -224,6 +224,7 @@ installation/temp/
 # pest exclusions
 
 # exercise exclusions
+.temp/
 synthetic-valley-base/
 synthetic-valley-advanced*/
 synthetic-valley-original/

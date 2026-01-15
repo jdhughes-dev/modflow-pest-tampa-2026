@@ -2,6 +2,6 @@ BEGIN options
 END options
 
 BEGIN continuous  FILEOUT  sv.riv.obs.csv
-    OPEN/CLOSE  'external/sv.riv.obs_continuous_sv.riv.obs.csv.txt'
+  RIV-SWGW  RIV  RIV
 END continuous  FILEOUT  sv.riv.obs.csv
 
