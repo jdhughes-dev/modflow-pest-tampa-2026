@@ -13,12 +13,14 @@ update-dependencies = "pixi update flopy modflow-devtools"
 update-flopy-dfn = { cmd = "python -m flopy.mf6.utils.generate_classes --dfnpath modflow6/doc/mf6io/mf6ivar/dfn" }
 test-installation = { cmd = "python test_installation.py", cwd = "installation" }
 install = { depends-on = [
+  "pre-commit-install",
   "obtain-modflow",
   "test-installation",
 ] }
 
 # format files and clean notebooks
-format = {cmd = "pre-commit run --all-files" }
+pre-commit-install = { cmd = "pre-commit install" }
+format = { cmd = "pre-commit run --all-files" }
 
 # run jupyter lab
 jupyter = { cmd = "jupyter lab" }
