@@ -23,8 +23,7 @@ Tuesday January 20, 2026 8:00 AM - Friday January 23, 2026 2:00 PM
 #### __Wednesday - MODFLOW 6__
 | Start Time | End Time  | Type | Topic |
 | ---------- | -------- | ---- | ----- |
-| 8:00 AM | 8:30 AM | **Presentation<br>Hands-on** | variable density concepts and simulations 
-| 8:30 AM | 9:00 AM | **Hands-on** | variable density concepts and simulations 
+| 8:00 AM | 9:00 AM | **Presentation<br>Hands-on** | variable density concepts and simulations 
 | 9:00 AM | 10:00 AM | **Presentation<br>Hands-on** | parallel model simulations 
 | 10:00 AM | 11:00 AM | **Presentation<br>Hands-on** | deep dive on solver settings
 | 11:00 AM | 12:00 PM | **Presentation<br>Hands-on** | MODFLOW 6 Application Programming Interface (API)
