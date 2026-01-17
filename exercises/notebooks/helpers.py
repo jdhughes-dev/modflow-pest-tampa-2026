@@ -3,7 +3,10 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_pdf import PdfPages
+import xarray as xa
+import pickle
 import pyemu
+import flopy
 
 
 def process_csv_files(model_ws="."):
@@ -490,12 +493,18 @@ def plot_ies_forecasts(m_d, pst_name="pest.pst", noptmax=None, include_t=False):
                         fc="b",
                         alpha=0.5,
                         label="posterior",
+                        density=True,
                     )
 
                 ax.set_title("{0} {1}".format(quan, usecol), loc="left")
                 # xlim = ax.get_xlim()
                 ax.hist(
-                    pr.loc[:, oname].values, bins=20, fc="0.5", alpha=0.5, label="prior"
+                    pr.loc[:, oname].values,
+                    bins=20,
+                    fc="0.5",
+                    alpha=0.5,
+                    label="prior",
+                    density=True,
                 )
                 # ax.set_xlim(xlim)
                 if include_t:
@@ -542,7 +551,64 @@ def final_steps(pst):
             print(col, q)
 
 
+def get_domain_map():
+    nc_path = os.path.join(
+        "..", "synthetic-valley", "data", "synthetic_valley_truth.nc"
+    )
+    nc_ds = xa.open_dataset(nc_path)
+    lake_location = nc_ds["lake_location"].to_numpy()
+    sim = flopy.mf6.MFSimulation.load(
+        sim_ws=os.path.join("..", "models", "synthetic-valley-base-annual"),
+        verbosity_level=0,
+    )
+    gwf = sim.get_model()
+    obs_path = os.path.join("..", "synthetic-valley", "data")
+    with open(os.path.join(obs_path, "obs_data.pkl"), "rb") as f:
+        obs_rc_locs, well_depth, aq_layer = pickle.load(f)
+
+    xy = [
+        (
+            float(gwf.modelgrid.xcellcenters[i, j]),
+            float(gwf.modelgrid.ycellcenters[i, j]),
+        )
+        for i, j in obs_rc_locs
+    ]
+    x, y = np.array(xy)[:, 0], np.array(xy)[:, 1]
+
+    with flopy.plot.styles.USGSMap():
+        fig, axs = plt.subplots(1, 2, figsize=(8, 5), sharey=True)
+
+        ax = axs[0]
+        ax.set_xlim(0, 12500)
+        ax.set_ylim(0, 20000)
+        mm = flopy.plot.PlotMapView(model=gwf, ax=ax, extent=gwf.modelgrid.extent)
+        mm.plot_array(lake_location, cmap="Blues_r", masked_values=[0])
+        mm.plot_grid(lw=0.5, color="0.5")
+        mm.plot_bc("riv", label="river")
+        mm.plot_bc("pwell", kper=1, plotAll=True, label="well")
+        ax.scatter(x, y, s=3, c="black")
+        for i in range(len(xy)):
+            ax.annotate(f"wt{i + 1}", (x[i], y[i]))
+
+        ax.set_title("Water Table")
+
+        ax = axs[1]
+        ax.set_xlim(0, 12500)
+        ax.set_ylim(0, 20000)
+        mm = flopy.plot.PlotMapView(model=gwf, ax=ax, extent=gwf.modelgrid.extent)
+        mm.plot_grid(lw=0.5, color="0.5")
+        mm.plot_bc("pwell", kper=1, plotAll=True, label="well")
+        ax.scatter(x, y, s=3, c="black")
+        for i in range(len(xy)):
+            ax.annotate(f"aq{i + 1}", (x[i], y[i]))
+
+        ax.set_title("Lower Aquifer")
+    return fig, axs
+
+
 if __name__ == "__main__":
+    get_domain_map()
+    exit()
     # process_csv_files(os.path.join("..","models","synthetic-valley-truth-advanced-monthly"))
     # process_csv_files(os.path.join("model_and_pest_files_opt"))
     # extract_true_obs(
