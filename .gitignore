@@ -209,7 +209,7 @@ __marimo__/
 # mac exclusions
 .DS_Store
 
-# installation exclusins
+# installation exclusions
 modflow6/
 installation/temp/
 
@@ -224,6 +224,7 @@ installation/temp/
 # pest exclusions
 
 # exercise exclusions
+.animation/
 .temp/
 synthetic-valley-base/
 synthetic-valley-advanced*/
@@ -234,3 +235,4 @@ synthetic-valley-vg-prt/
 synthetic-valley-vg-gwt/
 synthetic-valley-vg-api/
 synthetic-valley-adj/
+variable-density/
