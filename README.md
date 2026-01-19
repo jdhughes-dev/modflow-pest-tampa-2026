@@ -26,7 +26,7 @@ Tuesday January 20, 2026 8:00 AM - Friday January 23, 2026 2:00 PM
 | 8:00 AM | 9:30 PM | 1.5 hours | **Presentation<br>Hands-on** | Particle tracking with the PRT model
 | 9:30 AM | 11:00 AM | 1.5 hours | **Presentation<br>Hands-on** | variable density concepts and simulations 
 | 11:00 AM | 12:00 AM | 1 hour | **Presentation<br>Hands-on** | parallel model simulations 
-| 1:00 PM | 2:00 PM | 1 hour | **Presentation<br>Hands-on** | deep dive on solver settings
+| 1:00 PM | 2:00 PM | 1 hour | **Presentation<br>Hands-on** | numerical solution (solver) deep dive
 | 2:30 PM | 3:45 PM | 1.25 hours | **Presentation<br>Hands-on** | MODFLOW 6 Application Programming Interface (API)
 | 3:45 PM | 5:00 PM | 1.25 hours | **Presentation<br>Hands-on** | MODFLOW 6 Adjoint (MF6-ADJ) and current/future MODFLOW 6 developments
 
@@ -37,8 +37,8 @@ Tuesday January 20, 2026 8:00 AM - Friday January 23, 2026 2:00 PM
 | 9:00 AM | 11:00 AM | 2 hours | **Hands-on** | setting up a pest interface manually. understanding parallelization concepts
 | 11:00 AM | 12:00 PM | 1 hour | **Presentation** | pilot points, geostatistics, and heterogeneity
 | 1:00 PM | 2:30 PM | 1.5 hours | **Hands-on** | automating pest interface construction, setting obs vals and weights
-| 2:30 PM | 3:15 PM | 0.75 hours | **Presentation**  | ensemble methods
-| 3:15 PM | 4:30 PM | 1.25 hour | **Hands-on** | initial ies run
+| 2:30 PM | 3:15 PM | 0.75 hour | **Presentation**  | ensemble methods
+| 3:15 PM | 4:30 PM | 1.25 hours | **Hands-on** | initial ies run
 
 #### __Friday - PEST++__
 | Start Time | End Time | Total Time | Type | Topic |

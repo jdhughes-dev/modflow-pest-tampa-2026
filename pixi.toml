@@ -12,10 +12,12 @@ linux = "4.4.0"
 update-dependencies = "pixi update flopy modflow-devtools"
 update-flopy-dfn = { cmd = "python -m flopy.mf6.utils.generate_classes --dfnpath modflow6/doc/mf6io/mf6ivar/dfn" }
 test-installation = { cmd = "python test_installation.py", cwd = "installation" }
+get-additional-exes = {cmd = "get-modflow --subset gridgen,triangle :python" }
 install = { depends-on = [
   "pre-commit-install",
   "obtain-modflow",
   "test-installation",
+  "get-additional-exes",
 ] }
 
 # format files and clean notebooks
@@ -99,6 +101,7 @@ modflow-devtools = "*"
 tomli-w = "*"
 boltons = "*"
 pymetis = "*"
+h5py = ">=3.13.0,<4"
 
 # pre-commit tools
 pre-commit = "*"

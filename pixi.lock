@@ -138,6 +138,7 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/linux-64/graphite2-1.3.14-hecca717_2.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/h11-0.16.0-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/h2-4.3.0-pyhcf101f3_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/linux-64/h5py-3.13.0-nompi_py312hedeef09_100.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/harfbuzz-11.4.5-h15599e2_0.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/hdf4-4.2.15-h2a13503_7.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/hdf5-1.14.3-mpi_openmpi_hf5a2fd3_4.conda
@@ -565,7 +566,6 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/linux-64/zlib-ng-2.3.2-hceb46e0_1.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/zstandard-0.25.0-py312h5253ce2_1.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/zstd-1.5.7-hb78ec9c_6.conda
-      - pypi: https://files.pythonhosted.org/packages/3a/30/d1c94066343a98bb2cea40120873193a4fed68c4ad7f8935c11caf74c681/h5py-3.15.1-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl
       - pypi: git+https://github.com/INTERA-Inc/mf6adj.git?rev=develop#ed7cf6c83c6310e9871e9df71ab663241de09da0
       linux-aarch64:
       - conda: https://conda.anaconda.org/conda-forge/linux-aarch64/_openmp_mutex-4.5-2_gnu.tar.bz2
@@ -697,6 +697,7 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/linux-aarch64/graphite2-1.3.14-hfae3067_2.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/h11-0.16.0-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/h2-4.3.0-pyhcf101f3_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/linux-aarch64/h5py-3.13.0-nompi_py312h9a738b8_100.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-aarch64/harfbuzz-11.4.5-he4899c9_0.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-aarch64/hdf4-4.2.15-hb6ba311_7.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-aarch64/hdf5-1.14.3-mpi_openmpi_hed3b578_4.conda
@@ -1113,7 +1114,6 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/linux-aarch64/zlib-ng-2.3.2-ha7cb516_1.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-aarch64/zstandard-0.25.0-py312hd41f8a7_1.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-aarch64/zstd-1.5.7-h85ac4a6_6.conda
-      - pypi: https://files.pythonhosted.org/packages/00/69/ba36273b888a4a48d78f9268d2aee05787e4438557450a8442946ab8f3ec/h5py-3.15.1-cp312-cp312-manylinux_2_27_aarch64.manylinux_2_28_aarch64.whl
       - pypi: git+https://github.com/INTERA-Inc/mf6adj.git?rev=develop#ed7cf6c83c6310e9871e9df71ab663241de09da0
       osx-64:
       - conda: https://conda.anaconda.org/conda-forge/osx-64/_openmp_mutex-4.5-7_kmp_llvm.conda
@@ -1244,6 +1244,7 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/osx-64/graphite2-1.3.14-h21dd04a_2.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/h11-0.16.0-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/h2-4.3.0-pyhcf101f3_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/osx-64/h5py-3.13.0-nompi_py312hea5ca7c_100.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-64/harfbuzz-11.4.5-h0ffbb26_0.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-64/hdf4-4.2.15-h8138101_7.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-64/hdf5-1.14.3-mpi_openmpi_hdac8f8d_3.conda
@@ -1614,7 +1615,6 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/osx-64/zlib-ng-2.3.2-h8bce59a_1.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-64/zstandard-0.25.0-py312h01f6755_1.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-64/zstd-1.5.7-h3eecb57_6.conda
-      - pypi: https://files.pythonhosted.org/packages/62/b8/c0d9aa013ecfa8b7057946c080c0c07f6fa41e231d2e9bd306a2f8110bdc/h5py-3.15.1-cp312-cp312-macosx_10_13_x86_64.whl
       - pypi: git+https://github.com/INTERA-Inc/mf6adj.git?rev=develop#ed7cf6c83c6310e9871e9df71ab663241de09da0
       osx-arm64:
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/_openmp_mutex-4.5-7_kmp_llvm.conda
@@ -1745,6 +1745,7 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/graphite2-1.3.14-hec049ff_2.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/h11-0.16.0-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/h2-4.3.0-pyhcf101f3_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/osx-arm64/h5py-3.13.0-nompi_py312hd7c5113_100.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/harfbuzz-11.4.5-hf4e55d4_0.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/hdf4-4.2.15-h2ee6834_7.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/hdf5-1.14.3-mpi_openmpi_h7d685e0_4.conda
@@ -2116,7 +2117,6 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/zlib-ng-2.3.2-hed4e4f5_1.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/zstandard-0.25.0-py312h37e1c23_1.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/zstd-1.5.7-hbf9d68e_6.conda
-      - pypi: https://files.pythonhosted.org/packages/a4/5e/3c6f6e0430813c7aefe784d00c6711166f46225f5d229546eb53032c3707/h5py-3.15.1-cp312-cp312-macosx_11_0_arm64.whl
       - pypi: git+https://github.com/INTERA-Inc/mf6adj.git?rev=develop#ed7cf6c83c6310e9871e9df71ab663241de09da0
       win-64:
       - conda: https://conda.anaconda.org/conda-forge/win-64/_openmp_mutex-4.5-2_gnu.conda
@@ -2234,6 +2234,7 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/win-64/graphite2-1.3.14-hac47afa_2.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/h11-0.16.0-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/h2-4.3.0-pyhcf101f3_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/win-64/h5py-3.15.1-nompi_py312h03cd2ba_101.conda
       - conda: https://conda.anaconda.org/conda-forge/win-64/harfbuzz-12.2.0-h5f2951f_0.conda
       - conda: https://conda.anaconda.org/conda-forge/win-64/hdf4-4.2.15-h5557f11_7.conda
       - conda: https://conda.anaconda.org/conda-forge/win-64/hdf5-1.14.6-nompi_h89f0904_104.conda
@@ -2560,7 +2561,6 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/win-64/zlib-1.3.1-h2466b09_2.conda
       - conda: https://conda.anaconda.org/conda-forge/win-64/zlib-ng-2.3.2-h0261ad2_1.conda
       - conda: https://conda.anaconda.org/conda-forge/win-64/zstd-1.5.7-h534d264_6.conda
-      - pypi: https://files.pythonhosted.org/packages/cf/51/329e7436bf87ca6b0fe06dd0a3795c34bebe4ed8d6c44450a20565d57832/h5py-3.15.1-cp312-cp312-win_amd64.whl
       - pypi: git+https://github.com/INTERA-Inc/mf6adj.git?rev=develop#ed7cf6c83c6310e9871e9df71ab663241de09da0
 packages:
 - conda: https://conda.anaconda.org/conda-forge/linux-64/_libgcc_mutex-0.1-conda_forge.tar.bz2
@@ -8027,41 +8027,91 @@ packages:
   - pkg:pypi/h2?source=hash-mapping
   size: 95967
   timestamp: 1756364871835
-- pypi: https://files.pythonhosted.org/packages/00/69/ba36273b888a4a48d78f9268d2aee05787e4438557450a8442946ab8f3ec/h5py-3.15.1-cp312-cp312-manylinux_2_27_aarch64.manylinux_2_28_aarch64.whl
-  name: h5py
-  version: 3.15.1
-  sha256: 8a33bfd5dfcea037196f7778534b1ff7e36a7f40a89e648c8f2967292eb6898e
-  requires_dist:
-  - numpy>=1.21.2
-  requires_python: '>=3.10'
-- pypi: https://files.pythonhosted.org/packages/3a/30/d1c94066343a98bb2cea40120873193a4fed68c4ad7f8935c11caf74c681/h5py-3.15.1-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl
-  name: h5py
-  version: 3.15.1
-  sha256: 25c8843fec43b2cc368aa15afa1cdf83fc5e17b1c4e10cd3771ef6c39b72e5ce
-  requires_dist:
-  - numpy>=1.21.2
-  requires_python: '>=3.10'
-- pypi: https://files.pythonhosted.org/packages/62/b8/c0d9aa013ecfa8b7057946c080c0c07f6fa41e231d2e9bd306a2f8110bdc/h5py-3.15.1-cp312-cp312-macosx_10_13_x86_64.whl
-  name: h5py
-  version: 3.15.1
-  sha256: 316dd0f119734f324ca7ed10b5627a2de4ea42cc4dfbcedbee026aaa361c238c
-  requires_dist:
-  - numpy>=1.21.2
-  requires_python: '>=3.10'
-- pypi: https://files.pythonhosted.org/packages/a4/5e/3c6f6e0430813c7aefe784d00c6711166f46225f5d229546eb53032c3707/h5py-3.15.1-cp312-cp312-macosx_11_0_arm64.whl
-  name: h5py
-  version: 3.15.1
-  sha256: b51469890e58e85d5242e43aab29f5e9c7e526b951caab354f3ded4ac88e7b76
-  requires_dist:
-  - numpy>=1.21.2
-  requires_python: '>=3.10'
-- pypi: https://files.pythonhosted.org/packages/cf/51/329e7436bf87ca6b0fe06dd0a3795c34bebe4ed8d6c44450a20565d57832/h5py-3.15.1-cp312-cp312-win_amd64.whl
-  name: h5py
-  version: 3.15.1
-  sha256: 59b25cf02411bf12e14f803fef0b80886444c7fe21a5ad17c6a28d3f08098a1e
-  requires_dist:
-  - numpy>=1.21.2
-  requires_python: '>=3.10'
+- conda: https://conda.anaconda.org/conda-forge/linux-64/h5py-3.13.0-nompi_py312hedeef09_100.conda
+  sha256: 76bb853325f0c756599edb0be014723b01fea61e24817fd2f0b9ddfe4c570c0f
+  md5: ed73cf6f5e1ce5e823e6efcf54cbdc51
+  depends:
+  - __glibc >=2.17,<3.0.a0
+  - cached-property
+  - hdf5 >=1.14.3,<1.14.4.0a0
+  - libgcc >=13
+  - numpy >=1.19,<3
+  - python >=3.12,<3.13.0a0
+  - python_abi 3.12.* *_cp312
+  license: BSD-3-Clause
+  license_family: BSD
+  purls:
+  - pkg:pypi/h5py?source=hash-mapping
+  size: 1388165
+  timestamp: 1739952623855
+- conda: https://conda.anaconda.org/conda-forge/linux-aarch64/h5py-3.13.0-nompi_py312h9a738b8_100.conda
+  sha256: 2bcc64efe627350a699c53876a660b5c0ce48c30e67acf79d389601a4465b282
+  md5: ccd9bad975a972ee8c3ba2a77acc3c9b
+  depends:
+  - cached-property
+  - hdf5 >=1.14.3,<1.14.4.0a0
+  - libgcc >=13
+  - numpy >=1.19,<3
+  - python >=3.12,<3.13.0a0
+  - python >=3.12,<3.13.0a0 *_cpython
+  - python_abi 3.12.* *_cp312
+  license: BSD-3-Clause
+  license_family: BSD
+  purls:
+  - pkg:pypi/h5py?source=hash-mapping
+  size: 1363701
+  timestamp: 1739952642180
+- conda: https://conda.anaconda.org/conda-forge/osx-64/h5py-3.13.0-nompi_py312hea5ca7c_100.conda
+  sha256: 99ef28fdfa99c75f95edebb5d468250e4395a5bc823682ef3542bda19f6f90c2
+  md5: 55bc071459c1de6abc4d02133a540021
+  depends:
+  - __osx >=10.13
+  - cached-property
+  - hdf5 >=1.14.3,<1.14.4.0a0
+  - numpy >=1.19,<3
+  - python >=3.12,<3.13.0a0
+  - python_abi 3.12.* *_cp312
+  license: BSD-3-Clause
+  license_family: BSD
+  purls:
+  - pkg:pypi/h5py?source=hash-mapping
+  size: 1205893
+  timestamp: 1739952559909
+- conda: https://conda.anaconda.org/conda-forge/osx-arm64/h5py-3.13.0-nompi_py312hd7c5113_100.conda
+  sha256: 1cfd7bd567c2d8cd4c532f88c342f9346867ef52dab9d65ec1089c90eb94b6e4
+  md5: 227b0c53bc3d4131996bf7de479fe185
+  depends:
+  - __osx >=11.0
+  - cached-property
+  - hdf5 >=1.14.3,<1.14.4.0a0
+  - numpy >=1.19,<3
+  - python >=3.12,<3.13.0a0
+  - python >=3.12,<3.13.0a0 *_cpython
+  - python_abi 3.12.* *_cp312
+  license: BSD-3-Clause
+  license_family: BSD
+  purls:
+  - pkg:pypi/h5py?source=hash-mapping
+  size: 1237897
+  timestamp: 1739953225445
+- conda: https://conda.anaconda.org/conda-forge/win-64/h5py-3.15.1-nompi_py312h03cd2ba_101.conda
+  sha256: 15ddb5420b289cd048ffef089514c31cdc90c77d5cef7e36667563335be2769d
+  md5: 555b01f3a74e7ca56445c20555b78cff
+  depends:
+  - cached-property
+  - hdf5 >=1.14.6,<1.14.7.0a0
+  - numpy >=1.23,<3
+  - python >=3.12,<3.13.0a0
+  - python_abi 3.12.* *_cp312
+  - ucrt >=10.0.20348.0
+  - vc >=14.3,<15
+  - vc14_runtime >=14.44.35208
+  license: BSD-3-Clause
+  license_family: BSD
+  purls:
+  - pkg:pypi/h5py?source=hash-mapping
+  size: 1050907
+  timestamp: 1764016810256
 - conda: https://conda.anaconda.org/conda-forge/linux-64/harfbuzz-11.4.5-h15599e2_0.conda
   sha256: 9d0d74858e8f8b76f6d3bf11a7390e6eb18eb743dd6e5fd7c4e9822634556f6d
   md5: 1276ae4aa3832a449fcb4253c30da4bc

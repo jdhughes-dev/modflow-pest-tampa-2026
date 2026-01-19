@@ -226,6 +226,7 @@ installation/temp/
 # exercise exclusions
 .animation/
 .temp/
+grids/
 synthetic-valley-base/
 synthetic-valley-advanced*/
 synthetic-valley-original/
@@ -233,6 +234,8 @@ synthetic-valley-calibration*/
 synthetic-valley-working*/
 synthetic-valley-vg-prt/
 synthetic-valley-vg-gwt/
+synthetic-valley-vg-parallel/
 synthetic-valley-vg-api/
+synthetic-valley-adj/
 synthetic-valley-adj/
 variable-density/
