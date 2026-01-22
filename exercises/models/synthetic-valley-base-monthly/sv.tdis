@@ -1,5 +1,4 @@
 BEGIN options
-  TIME_UNITS  day
   START_DATE_TIME  1962-01-01t00:00:00
 END options
 
